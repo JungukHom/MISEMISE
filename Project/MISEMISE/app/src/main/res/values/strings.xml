@@ -3,6 +3,20 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
     <string name="action_settings">Settings</string>
+
+    <string name="misemise">미세미세</string>
+
+    <string name="nav_main">메인</string>
+    <string name="nav_who">WHO 기준</string>
+    <string name="nav_we">우리어플 기준</string>
+    <string name="nav_alarm">알람</string>
+    <string name="nav_share">공유하기</string>
+    <string name="nav_manage">설정</string>
+
+
+    <!--
+    <string name=""></string>
+    -->
+
 </resources>
