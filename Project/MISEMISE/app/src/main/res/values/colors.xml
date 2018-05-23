@@ -6,4 +6,7 @@
 
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
+
+    <!-- main -->
+    <color name="main_text">#FFFFFF</color>
 </resources>

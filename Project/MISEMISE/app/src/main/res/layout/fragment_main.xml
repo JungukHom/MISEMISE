@@ -14,6 +14,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="#dd99dd"
             android:gravity="center_horizontal"
             android:orientation="vertical"
             android:paddingBottom="15dp"
@@ -21,10 +22,11 @@
 
             <!-- 대문정보 layout -->
             <LinearLayout
+                android:id="@+id/main_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#FFFFFF"
                 android:layout_marginBottom="30dp"
+                android:background="#dd99dd"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
 
@@ -34,7 +36,7 @@
                     android:layout_height="wrap_content"
                     android:text="서대문구 남가좌2동"
                     android:textAlignment="center"
-                    android:textColor="@color/black"
+                    android:textColor="@color/main_text"
                     android:textSize="25sp" />
 
                 <TextView
@@ -43,10 +45,11 @@
                     android:layout_height="wrap_content"
                     android:text="2018-05-21 09:20PM"
                     android:textAlignment="center"
-                    android:textColor="@color/black"
+                    android:textColor="@color/main_text"
                     android:textSize="20sp" />
 
                 <ImageView
+                    android:id="@+id/main_face"
                     android:layout_width="200dp"
                     android:layout_height="200dp"
                     android:layout_marginBottom="25dp"
@@ -59,7 +62,7 @@
                     android:layout_height="wrap_content"
                     android:text="나쁨"
                     android:textAlignment="center"
-                    android:textColor="@color/black"
+                    android:textColor="@color/main_text"
                     android:textSize="25sp" />
 
                 <TextView
@@ -68,7 +71,7 @@
                     android:layout_height="wrap_content"
                     android:text="공기가 탁하네요. 조심하세요~"
                     android:textAlignment="center"
-                    android:textColor="@color/black"
+                    android:textColor="@color/main_text"
                     android:textSize="20sp" />
 
             </LinearLayout>
@@ -86,6 +89,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="#dd99dd"
                     android:orientation="horizontal">
 
                     <!-- 미세먼지 -->
@@ -103,7 +107,7 @@
                             android:layout_height="wrap_content"
                             android:text="미세먼지"
                             android:textAlignment="center"
-                            android:textColor="@color/black"
+                            android:textColor="@color/main_text"
                             android:textSize="12sp" />
 
                         <ImageView
@@ -119,7 +123,7 @@
                             android:layout_height="wrap_content"
                             android:text="나쁨"
                             android:textAlignment="center"
-                            android:textColor="@color/black"
+                            android:textColor="@color/main_text"
                             android:textSize="12sp" />
 
                         <TextView
@@ -128,7 +132,7 @@
                             android:layout_height="wrap_content"
                             android:text="52ug/m^2"
                             android:textAlignment="center"
-                            android:textColor="@color/black"
+                            android:textColor="@color/main_text"
                             android:textSize="12sp" />
 
                     </LinearLayout>
@@ -148,7 +152,7 @@
                             android:layout_height="wrap_content"
                             android:text="미세먼지"
                             android:textAlignment="center"
-                            android:textColor="@color/black"
+                            android:textColor="@color/main_text"
                             android:textSize="12sp" />
 
                         <ImageView
@@ -164,7 +168,7 @@
                             android:layout_height="wrap_content"
                             android:text="나쁨"
                             android:textAlignment="center"
-                            android:textColor="@color/black"
+                            android:textColor="@color/main_text"
                             android:textSize="12sp" />
 
                         <TextView
@@ -173,7 +177,7 @@
                             android:layout_height="wrap_content"
                             android:text="52ug/m^2"
                             android:textAlignment="center"
-                            android:textColor="@color/black"
+                            android:textColor="@color/main_text"
                             android:textSize="12sp" />
 
                     </LinearLayout>
@@ -193,7 +197,7 @@
                             android:layout_height="wrap_content"
                             android:text="미세먼지"
                             android:textAlignment="center"
-                            android:textColor="@color/black"
+                            android:textColor="@color/main_text"
                             android:textSize="12sp" />
 
                         <ImageView
@@ -209,7 +213,7 @@
                             android:layout_height="wrap_content"
                             android:text="나쁨"
                             android:textAlignment="center"
-                            android:textColor="@color/black"
+                            android:textColor="@color/main_text"
                             android:textSize="12sp" />
 
                         <TextView
@@ -218,7 +222,7 @@
                             android:layout_height="wrap_content"
                             android:text="52ug/m^2"
                             android:textAlignment="center"
-                            android:textColor="@color/black"
+                            android:textColor="@color/main_text"
                             android:textSize="12sp" />
 
                     </LinearLayout>
@@ -238,7 +242,7 @@
                             android:layout_height="wrap_content"
                             android:text="미세먼지"
                             android:textAlignment="center"
-                            android:textColor="@color/black"
+                            android:textColor="@color/main_text"
                             android:textSize="12sp" />
 
                         <ImageView
@@ -254,7 +258,7 @@
                             android:layout_height="wrap_content"
                             android:text="나쁨"
                             android:textAlignment="center"
-                            android:textColor="@color/black"
+                            android:textColor="@color/main_text"
                             android:textSize="12sp" />
 
                         <TextView
@@ -263,7 +267,7 @@
                             android:layout_height="wrap_content"
                             android:text="52ug/m^2"
                             android:textAlignment="center"
-                            android:textColor="@color/black"
+                            android:textColor="@color/main_text"
                             android:textSize="12sp" />
 
                     </LinearLayout>
@@ -283,7 +287,7 @@
                             android:layout_height="wrap_content"
                             android:text="미세먼지"
                             android:textAlignment="center"
-                            android:textColor="@color/black"
+                            android:textColor="@color/main_text"
                             android:textSize="12sp" />
 
                         <ImageView
@@ -299,7 +303,7 @@
                             android:layout_height="wrap_content"
                             android:text="나쁨"
                             android:textAlignment="center"
-                            android:textColor="@color/black"
+                            android:textColor="@color/main_text"
                             android:textSize="12sp" />
 
                         <TextView
@@ -308,7 +312,7 @@
                             android:layout_height="wrap_content"
                             android:text="52ug/m^2"
                             android:textAlignment="center"
-                            android:textColor="@color/black"
+                            android:textColor="@color/main_text"
                             android:textSize="12sp" />
 
                     </LinearLayout>
@@ -328,7 +332,7 @@
                             android:layout_height="wrap_content"
                             android:text="미세먼지"
                             android:textAlignment="center"
-                            android:textColor="@color/black"
+                            android:textColor="@color/main_text"
                             android:textSize="12sp" />
 
                         <ImageView
@@ -344,7 +348,7 @@
                             android:layout_height="wrap_content"
                             android:text="나쁨"
                             android:textAlignment="center"
-                            android:textColor="@color/black"
+                            android:textColor="@color/main_text"
                             android:textSize="12sp" />
 
                         <TextView
@@ -353,7 +357,7 @@
                             android:layout_height="wrap_content"
                             android:text="52ug/m^2"
                             android:textAlignment="center"
-                            android:textColor="@color/black"
+                            android:textColor="@color/main_text"
                             android:textSize="12sp" />
 
                     </LinearLayout>
@@ -365,11 +369,11 @@
 
             <!-- 광고 -->
             <LinearLayout
-                android:background="#88008800"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
+                android:background="#88008800"
                 android:gravity="center"
                 android:orientation="vertical">
 
@@ -388,7 +392,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
-                android:background="#88880000"
+                android:background="#dd99dd"
                 android:gravity="center"
                 android:orientation="vertical">
 
@@ -397,14 +401,16 @@
                     android:layout_height="300dp"
                     android:gravity="center_horizontal|center_vertical"
                     android:text="세부사항이 들어갈 자리입니다."
-                    android:textAlignment="center" />
+                    android:textAlignment="center"
+                    android:textColor="@color/main_text" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal|center_vertical"
                     android:text="미세미세는 ~~~~~\n\n\n실제 수치와 다를 수 있습니다."
-                    android:textAlignment="center" />
+                    android:textAlignment="center"
+                    android:textColor="@color/main_text" />
 
             </LinearLayout>
 

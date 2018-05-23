@@ -1,7 +1,9 @@
 package com.skykallove.misemise.Activity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -14,8 +16,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.skykallove.misemise.Fragment.AlarmFragment;
+import com.skykallove.misemise.Fragment.ContactFragment;
 import com.skykallove.misemise.Fragment.MainFragment;
 import com.skykallove.misemise.Fragment.SettingsFragment;
 import com.skykallove.misemise.Fragment.ShareFragment;
@@ -31,7 +37,33 @@ public class MainActivity extends AppCompatActivity
     // 우리 어플 기준 (미세미세=8단계)
     // 알람
     // 공유하기
+    // 문의하기
     // 설정
+
+    // main_title
+    TextView location;
+    TextView time;
+    ImageView face;
+    TextView quality;
+    TextView qualityMessage;
+
+    // main_detail
+
+    /*
+    msrdt 측정일시
+    msrrgn_nm 권영멱
+    msrste_nm 측정소명
+    pm10 미세먼지
+    pm25 초미세먼지
+    o3   오존
+    no2  이산화실소농도
+    co   일산화탄소농도
+    so2  아황산가스농도
+    idex_nm  통합대기환경등급
+    idex_mvl 통합대기환경지수
+    arplt_main 지수결정물질
+    */
+
 
     private int currentFragment = R.id.nav_main;
 
@@ -116,6 +148,8 @@ public class MainActivity extends AppCompatActivity
             fragment = new AlarmFragment();
         } else if (id == R.id.nav_share) {
             fragment = new ShareFragment();
+        } else if (id == R.id.nav_contact) {
+            fragment = new ContactFragment();
         } else if (id == R.id.nav_settings) {
             fragment = new SettingsFragment();
         }
@@ -134,8 +168,7 @@ public class MainActivity extends AppCompatActivity
             ft.replace(R.id.content_fragment_layout, fragment);
             ft.commit();
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -144,8 +177,6 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
     }
-
-
 
     public void showFinishAlertDialog() {
         AlertDialog.Builder finishDialog = new AlertDialog.Builder(this);
