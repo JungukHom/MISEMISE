@@ -18,25 +18,24 @@ public class AsyncRequestTask extends AsyncTask<String, String, String> {
     private String url;
     private ContentValues values;
 
-    public AsyncRequestTask(String url, ContentValues values, AsyncResponse delegate) {
+    public AsyncRequestTask(AsyncResponse delegate, String url, ContentValues values) {
         this.url = url;
         this.values = values;
         this.delegate = delegate;
     }
 
     @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
-    }
-
-    @Override
     protected String doInBackground(String... params) {
-        return null;
-    }
+        String result;
+        HttpManager httpManager = HttpManager.getInstance();
 
-    @Override
-    protected void onProgressUpdate(String... values) {
-        super.onProgressUpdate(values);
+        url += values.get("msrrgn") + "/" + values.get("msrste");
+
+        result = httpManager.request(url);
+        if (result == null || result.equals("")) {
+            result = "error";
+        }
+        return result;
     }
 
     @Override

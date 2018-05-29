@@ -1,9 +1,7 @@
 package com.skykallove.misemise.Activity;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -16,8 +14,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.skykallove.misemise.Fragment.AlarmFragment;
@@ -27,7 +25,11 @@ import com.skykallove.misemise.Fragment.SettingsFragment;
 import com.skykallove.misemise.Fragment.ShareFragment;
 import com.skykallove.misemise.Fragment.WHOFragment;
 import com.skykallove.misemise.Fragment.WeFragment;
+import com.skykallove.misemise.Manager.AsyncManager;
+import com.skykallove.misemise.Manager.AsyncRequestTask;
+import com.skykallove.misemise.TrashCan.WrapManager;
 import com.skykallove.misemise.R;
+import com.skykallove.misemise.Utility.Url;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -79,6 +81,16 @@ public class MainActivity extends AppCompatActivity
         setTitle("");
 
         findUIObjects();
+
+        // test codes
+
+        AsyncManager manager = AsyncManager.getInstance();
+        manager.make(Url.TEST, WrapManager.getRequestString("서북권", "서대문구"));
+        manager.make(Url.TEST, WrapManager.getRequestString("서북권", "은평구"));
+
+        // test codes
+
+
 
         // TODO: 2018-05-21 HashKey
         // Log.d("HashKey : ", HashKeyManager.getKey("com.skykallove.misemise", getPackageManager()));
