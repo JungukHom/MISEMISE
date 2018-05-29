@@ -53,17 +53,19 @@ public class MainActivity extends AppCompatActivity
     msrdt 측정일시
     msrrgn_nm 권영멱
     msrste_nm 측정소명
+
+    < 슬라이드? >
     pm10 미세먼지
     pm25 초미세먼지
     o3   오존
-    no2  이산화실소농도
+    no2  이산화질소농도
     co   일산화탄소농도
     so2  아황산가스농도
+
     idex_nm  통합대기환경등급
     idex_mvl 통합대기환경지수
     arplt_main 지수결정물질
     */
-
 
     private int currentFragment = R.id.nav_main;
 
@@ -76,9 +78,12 @@ public class MainActivity extends AppCompatActivity
 
         setTitle("");
 
+        findUIObjects();
+
         // TODO: 2018-05-21 HashKey
         // Log.d("HashKey : ", HashKeyManager.getKey("com.skykallove.misemise", getPackageManager()));
 
+        // basic codes
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -90,6 +95,28 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        // basic codes
+    }
+
+    private void findUIObjects () {
+        findButtons();
+        findTextViews();
+        findEtc();
+    }
+
+    private void findButtons() {
+
+    }
+
+    private void findTextViews() {
+        location = (TextView) findViewById(R.id.main_location);
+        time = (TextView) findViewById(R.id.main_time);
+        quality = (TextView) findViewById(R.id.main_air_quality);
+        qualityMessage = (TextView) findViewById(R.id.main_air_quality_message);
+    }
+
+    private void findEtc() {
+        face = (ImageView) findViewById(R.id.main_face);
     }
 
     @Override

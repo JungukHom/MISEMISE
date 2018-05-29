@@ -19,8 +19,21 @@
     개발자에게 알려주세요. 더 좋은 미세미세가 되도록 노력하겠습니다.</string>
     <string name="contact_send">이메일 보내기</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="pm10">미세먼지</string>
+    <string name="pm25">초미세먼지</string>
+    <string name="o3">오존</string>
+    <string name="no2">이산화질소</string>
+    <string name="co">일산화탄소농도</string>
+    <string name="so2">아황산가스농도</string>
+
+    <string name="grade_01">최고</string>
+    <string name="grade_02">좋음</string>
+    <string name="grade_03">양호</string>
+    <string name="grade_04">보통</string>
+    <string name="grade_05">나쁨</string>
+    <string name="grade_06">상당히 나쁨</string>
+    <string name="grade_07">매우 나쁨</string>
+    <string name="grade_08">최악</string>
 
 
     <!--
