@@ -111,46 +111,6 @@ public class MainFragment extends Fragment {
         return view;
     }
 
-    private void SetTitleData(Map<String, String> titleData) {
-        location.setText(titleData.get("MSRRGN_NM") + " " + titleData.get("MSRSTE_NM"));
-        time.setText("측정일시 : " + titleData.get("MSRDT").toString());
-//        face;
-//        quality;
-//        qualityMessage;
-    }
-
-    private void SetDetailData(Map<String, String> detailData) {
-        // 미세먼지
-//        main_pm10_face;
-//        main_pm10_quality;
-        main_pm10_detail.setText(detailData.get("PM10"));
-
-        // 초미세먼지
-//        main_pm25_face;
-//        main_pm25_quality;
-        main_pm25_detail.setText(detailData.get("PM25"));
-
-        // 오존
-//        main_o3_face;
-//        main_o3_quality;
-        main_o3_detail.setText(detailData.get("O3"));
-
-        // 이산화질소
-//        main_no2_face;
-//        main_no2_quality;
-        main_no2_detail.setText(detailData.get("NO2"));
-
-        // 일산화탄소
-//        main_co_face;
-//        main_co_quality;
-        main_co_detail.setText(detailData.get("CO"));
-
-        // 아황산가스
-//        main_so2_face;
-//        main_so2_quality;
-        main_so2_detail.setText(detailData.get("SO2"));
-    }
-
     private void findUIObjects (View view) {
         findTitles(view);
         findDetails(view);
@@ -200,5 +160,45 @@ public class MainFragment extends Fragment {
         main_so2_face = (ImageView) view.findViewById(R.id.main_so2_face);
         main_so2_quality = (TextView) view.findViewById(R.id.main_so2_quality);
         main_so2_detail = (TextView) view.findViewById(R.id.main_so2_detail);
+    }
+
+    private void SetTitleData(Map<String, String> titleData) {
+        location.setText(titleData.get("MSRRGN_NM") + " " + titleData.get("MSRSTE_NM"));
+        time.setText("측정일시 : " + titleData.get("MSRDT").toString());
+//        face;
+//        quality;
+//        qualityMessage;
+    }
+
+    private void SetDetailData(Map<String, String> detailData) {
+        // 미세먼지
+//        main_pm10_face;
+//        main_pm10_quality;
+        main_pm10_detail.setText(detailData.get("PM10") + " ㎍/㎥");
+
+        // 초미세먼지
+//        main_pm25_face;
+//        main_pm25_quality;
+        main_pm25_detail.setText(detailData.get("PM25") + " ㎍/㎥");
+
+        // 오존
+//        main_o3_face;
+//        main_o3_quality;
+        main_o3_detail.setText(detailData.get("O3") + " ppm");
+
+        // 이산화질소
+//        main_no2_face;
+//        main_no2_quality;
+        main_no2_detail.setText(detailData.get("NO2") + " ppm");
+
+        // 일산화탄소
+//        main_co_face;
+//        main_co_quality;
+        main_co_detail.setText(detailData.get("CO") + " ppm");
+
+        // 아황산가스
+//        main_so2_face;
+//        main_so2_quality; +++
+        main_so2_detail.setText(detailData.get("SO2") + " ppm");
     }
 }
