@@ -12,9 +12,9 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,48 +26,15 @@ import com.skykallove.misemise.Fragment.ShareFragment;
 import com.skykallove.misemise.Fragment.WHOFragment;
 import com.skykallove.misemise.Fragment.WeFragment;
 import com.skykallove.misemise.Manager.AsyncManager;
-import com.skykallove.misemise.Manager.AsyncRequestTask;
+import com.skykallove.misemise.Manager.JSONManager;
 import com.skykallove.misemise.TrashCan.WrapManager;
 import com.skykallove.misemise.R;
-import com.skykallove.misemise.Utility.Url;
+import com.skykallove.misemise.Data.Url;
+
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
-    // 메인
-    // who 기준
-    // 우리 어플 기준 (미세미세=8단계)
-    // 알람
-    // 공유하기
-    // 문의하기
-    // 설정
-
-    // main_title
-    TextView location;
-    TextView time;
-    ImageView face;
-    TextView quality;
-    TextView qualityMessage;
-
-    // main_detail
-
-    /*
-    msrdt 측정일시
-    msrrgn_nm 권영멱
-    msrste_nm 측정소명
-
-    < 슬라이드? >
-    pm10 미세먼지
-    pm25 초미세먼지
-    o3   오존
-    no2  이산화질소농도
-    co   일산화탄소농도
-    so2  아황산가스농도
-
-    idex_nm  통합대기환경등급
-    idex_mvl 통합대기환경지수
-    arplt_main 지수결정물질
-    */
 
     private int currentFragment = R.id.nav_main;
 
@@ -79,19 +46,10 @@ public class MainActivity extends AppCompatActivity
         replaceFragment(new MainFragment());
 
         setTitle("");
-
-        findUIObjects();
-
-        // test codes
-
-        AsyncManager manager = AsyncManager.getInstance();
-        manager.make(Url.TEST, WrapManager.getRequestString("서북권", "서대문구"));
-        manager.make(Url.TEST, WrapManager.getRequestString("서북권", "은평구"));
+//        Log.i("test_a", a);
+//        Log.i("test_b", b);
 
         // test codes
-
-
-
         // TODO: 2018-05-21 HashKey
         // Log.d("HashKey : ", HashKeyManager.getKey("com.skykallove.misemise", getPackageManager()));
 
@@ -108,27 +66,6 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         // basic codes
-    }
-
-    private void findUIObjects () {
-        findButtons();
-        findTextViews();
-        findEtc();
-    }
-
-    private void findButtons() {
-
-    }
-
-    private void findTextViews() {
-        location = (TextView) findViewById(R.id.main_location);
-        time = (TextView) findViewById(R.id.main_time);
-        quality = (TextView) findViewById(R.id.main_air_quality);
-        qualityMessage = (TextView) findViewById(R.id.main_air_quality_message);
-    }
-
-    private void findEtc() {
-        face = (ImageView) findViewById(R.id.main_face);
     }
 
     @Override

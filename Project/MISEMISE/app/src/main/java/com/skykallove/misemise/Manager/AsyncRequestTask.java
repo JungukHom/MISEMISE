@@ -9,19 +9,12 @@ import android.os.AsyncTask;
 
 public class AsyncRequestTask extends AsyncTask<String, String, String> {
 
-    public interface AsyncResponse {
-        void onTaskFinish(String result);
-    }
-
-    public AsyncResponse delegate = null;
-
     private String url;
     private ContentValues values;
 
-    public AsyncRequestTask(AsyncResponse delegate, String url, ContentValues values) {
+    public AsyncRequestTask(String url, ContentValues values) {
         this.url = url;
         this.values = values;
-        this.delegate = delegate;
     }
 
     @Override
@@ -41,6 +34,5 @@ public class AsyncRequestTask extends AsyncTask<String, String, String> {
     @Override
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
-        delegate.onTaskFinish(result);
     }
 }

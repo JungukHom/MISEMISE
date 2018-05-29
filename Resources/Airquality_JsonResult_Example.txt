@@ -1,0 +1,45 @@
+{
+	"RealtimeCityAir":
+	{
+		"list_total_count":1,
+		"RESULT":
+		{
+			"CODE":"INFO-000",
+			"MESSAGE":"정상 처리되었습니다"
+		},
+		"row":
+		[
+			{
+				"MSRDT":"201805300200",
+				"MSRRGN_NM":"서북권",
+				"MSRSTE_NM":"서대문구",
+				"PM10":57.0,
+				"PM25":50.0,
+				"O3":0.019,
+				"NO2":0.021,
+				"CO":0.5,
+				"SO2":0.0020,
+				"IDEX_NM":"보통",
+				"IDEX_MVL":76.0,
+				"ARPLT_MAIN":"PM25"
+			}
+		]
+	}
+}
+
+[
+	{
+		"MSRDT":"201805300200",
+		"MSRRGN_NM":"서북권",
+		"MSRSTE_NM":"서대문구",
+		"PM10":57,
+		"PM25":50,
+		"O3":0.019,
+		"NO2":0.021,
+		"CO":0.5,
+		"SO2":0.002,
+		"IDEX_NM":"보통",
+		"IDEX_MVL":76,
+		"ARPLT_MAIN":"PM25"
+	}
+]

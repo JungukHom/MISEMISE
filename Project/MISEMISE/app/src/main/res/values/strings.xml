@@ -23,8 +23,8 @@
     <string name="pm25">초미세먼지</string>
     <string name="o3">오존</string>
     <string name="no2">이산화질소</string>
-    <string name="co">일산화탄소농도</string>
-    <string name="so2">아황산가스농도</string>
+    <string name="co">일산화탄소</string> <!-- 농도 -->
+    <string name="so2">아황산가스</string> <!-- 농도 -->
 
     <string name="grade_01">최고</string>
     <string name="grade_02">좋음</string>

@@ -1,4 +1,4 @@
-package com.skykallove.misemise.Utility;
+package com.skykallove.misemise.Data;
 
 /**
  * Created by sky on 2018-05-29.
