@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.skykallove.misemise.Data.Url;
+import com.skykallove.misemise.Manager.AirGradeManager;
+import com.skykallove.misemise.Manager.AirGradeWrapper;
 import com.skykallove.misemise.Manager.AsyncManager;
 import com.skykallove.misemise.Manager.JSONManager;
 import com.skykallove.misemise.R;
@@ -166,39 +168,51 @@ public class MainFragment extends Fragment {
         location.setText(titleData.get("MSRRGN_NM") + " " + titleData.get("MSRSTE_NM"));
         time.setText("측정일시 : " + titleData.get("MSRDT").toString());
 //        face;
-//        quality;
+        quality.setText(titleData.get("IDEX_NM"));
 //        qualityMessage;
     }
 
     private void SetDetailData(Map<String, String> detailData) {
         // 미세먼지
-//        main_pm10_face;
-//        main_pm10_quality;
-        main_pm10_detail.setText(detailData.get("PM10") + " ㎍/㎥");
+        String pm10_detail = detailData.get("PM10");
+        AirGradeWrapper pm10_wrapper = AirGradeManager.getPM10(pm10_detail);
+        main_pm10_face.setImageResource(pm10_wrapper.getFaceId());
+        main_pm10_quality.setText(pm10_wrapper.getQuality());
+        main_pm10_detail.setText(pm10_detail + " ㎍/㎥");
 
         // 초미세먼지
-//        main_pm25_face;
-//        main_pm25_quality;
-        main_pm25_detail.setText(detailData.get("PM25") + " ㎍/㎥");
+        String pm25_detail = detailData.get("PM25");
+        AirGradeWrapper pm25_wrapper = AirGradeManager.getPM10(pm25_detail);
+        main_pm25_face.setImageResource(pm25_wrapper.getFaceId());
+        main_pm25_quality.setText(pm25_wrapper.getQuality());
+        main_pm25_detail.setText(pm25_detail + " ㎍/㎥");
 
         // 오존
-//        main_o3_face;
-//        main_o3_quality;
-        main_o3_detail.setText(detailData.get("O3") + " ppm");
+        String o3_detail = detailData.get("O3");
+        AirGradeWrapper o3_wrapper = AirGradeManager.getO3(o3_detail);
+        main_o3_face.setImageResource(o3_wrapper.getFaceId());
+        main_o3_quality.setText(o3_wrapper.getQuality());
+        main_o3_detail.setText(o3_detail+ " ppm");
 
         // 이산화질소
-//        main_no2_face;
-//        main_no2_quality;
-        main_no2_detail.setText(detailData.get("NO2") + " ppm");
+        String no2_detail = detailData.get("NO2");
+        AirGradeWrapper no2_wrapper = AirGradeManager.getO3(no2_detail);
+        main_no2_face.setImageResource(no2_wrapper.getFaceId());
+        main_no2_quality.setText(no2_wrapper.getQuality());
+        main_no2_detail.setText(no2_detail + " ppm");
 
         // 일산화탄소
-//        main_co_face;
-//        main_co_quality;
-        main_co_detail.setText(detailData.get("CO") + " ppm");
+        String co_detail = detailData.get("CO");
+        AirGradeWrapper co_wrapper = AirGradeManager.getCO(co_detail);
+        main_co_face.setImageResource(co_wrapper.getFaceId());
+        main_co_quality.setText(co_wrapper.getQuality());
+        main_co_detail.setText(co_detail + " ppm");
 
         // 아황산가스
-//        main_so2_face;
-//        main_so2_quality; +++
-        main_so2_detail.setText(detailData.get("SO2") + " ppm");
+        String so2_detail = detailData.get("SO2");
+        AirGradeWrapper so2_wrapper = AirGradeManager.getSO2(so2_detail);
+        main_so2_face.setImageResource(so2_wrapper.getFaceId());
+        main_so2_quality.setText(so2_wrapper.getQuality());
+        main_so2_detail.setText(so2_detail + " ppm");
     }
 }
