@@ -12,6 +12,7 @@
 
         <!-- 전체 layout -->
         <LinearLayout
+            android:id="@+id/main_whole_background"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#dd99dd"
@@ -87,6 +88,7 @@
 
                 <!-- 세부 정보 layout -->
                 <LinearLayout
+                    android:id="@+id/main_detail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#dd99dd"
@@ -374,6 +376,7 @@
 
             <!-- 광고 -->
             <LinearLayout
+                android:id="@+id/main_advertisement"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -393,6 +396,7 @@
 
             <!-- 세부 사항 -->
             <LinearLayout
+                android:id="@+id/main_more_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"

@@ -1,13 +1,12 @@
 package com.skykallove.misemise.Fragment;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.skykallove.misemise.Data.Url;
@@ -18,6 +17,7 @@ import com.skykallove.misemise.Manager.JSONManager;
 import com.skykallove.misemise.R;
 import com.skykallove.misemise.TrashCan.WrapManager;
 
+import java.util.List;
 import java.util.Map;
 
 public class MainFragment extends Fragment {
@@ -26,13 +26,13 @@ public class MainFragment extends Fragment {
         // Required empty public constructor
     }
 
-    // 메인
-    // who 기준
-    // 우리 어플 기준 (미세미세=8단계)
-    // 알람
-    // 공유하기
-    // 문의하기
-    // 설정
+    List<LinearLayout> backgroundList;
+
+    LinearLayout main_whole_background;
+    LinearLayout main_title;
+    LinearLayout main_detail;
+    LinearLayout main_advertisement;
+    LinearLayout main_more_detail;
 
     // main_title
     TextView location;
@@ -83,7 +83,6 @@ public class MainFragment extends Fragment {
     msrrgn_nm 권영멱
     msrste_nm 측정소명
 
-    < 슬라이드? >
     pm10 미세먼지
     pm25 초미세먼지
     o3   오존
@@ -96,29 +95,59 @@ public class MainFragment extends Fragment {
     arplt_main 지수결정물질
     */
 
+    View view;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_main, container, false);
+        view = inflater.inflate(R.layout.fragment_main, container, false);
 
-        findUIObjects(view);
+        findUIObjects();
+        addBackgroundList();
 
         AsyncManager manager = AsyncManager.getInstance();
         String a = manager.make(Url.TEST, WrapManager.getRequestString("서북권", "서대문구"));
 
         Map<String, String> parsedData = JSONManager.parse(a);
-        SetTitleData(parsedData);
-        SetDetailData(parsedData);
+        setTitleData(parsedData);
+        setDetailData(parsedData);
+
+        // 통합대기환경등급을 비교해 background color change
+        // setBackgroundColor(parsedData.get("IDEX_NM").get);
 
         return view;
     }
 
-    private void findUIObjects (View view) {
-        findTitles(view);
-        findDetails(view);
+    private void findUIObjects() {
+        findBackgrounds();
+        findTitles();
+        findDetails();
     }
 
-    private void findTitles(View view) {
+    private void addBackgroundList() {
+        backgroundList.add(main_whole_background);
+        backgroundList.add(main_title);
+        backgroundList.add(main_detail);
+        backgroundList.add(main_advertisement);
+        backgroundList.add(main_more_detail);
+    }
+
+    private void setBackgroundColor(int colorId) {
+        for (int i = 0; i < backgroundList.size(); i++) {
+            backgroundList.get(i).setBackgroundResource(colorId);
+        }
+    }
+
+    private void findBackgrounds() {
+
+        main_whole_background = (LinearLayout) view.findViewById(R.id.main_whole_background);
+        main_title = (LinearLayout) view.findViewById(R.id.main_title);
+        main_detail = (LinearLayout) view.findViewById(R.id.main_detail);
+        main_advertisement = (LinearLayout) view.findViewById(R.id.main_advertisement);
+        main_more_detail = (LinearLayout) view.findViewById(R.id.main_more_detail);
+    }
+
+    private void findTitles() {
         location = (TextView) view.findViewById(R.id.main_location);
         time = (TextView) view.findViewById(R.id.main_time);
         face = (ImageView) view.findViewById(R.id.main_face);
@@ -126,7 +155,7 @@ public class MainFragment extends Fragment {
         qualityMessage = (TextView) view.findViewById(R.id.main_air_quality_message);
     }
 
-    private void findDetails(View view) {
+    private void findDetails() {
         // 미세먼지
         main_pm10_name = (TextView) view.findViewById(R.id.main_pm10_name);
         main_pm10_face = (ImageView) view.findViewById(R.id.main_pm10_face);
@@ -164,7 +193,7 @@ public class MainFragment extends Fragment {
         main_so2_detail = (TextView) view.findViewById(R.id.main_so2_detail);
     }
 
-    private void SetTitleData(Map<String, String> titleData) {
+    private void setTitleData(Map<String, String> titleData) {
         location.setText(titleData.get("MSRRGN_NM") + " " + titleData.get("MSRSTE_NM"));
         time.setText("측정일시 : " + titleData.get("MSRDT").toString());
 //        face;
@@ -172,46 +201,46 @@ public class MainFragment extends Fragment {
 //        qualityMessage;
     }
 
-    private void SetDetailData(Map<String, String> detailData) {
+    private void setDetailData(Map<String, String> detailData) {
         // 미세먼지
         String pm10_detail = detailData.get("PM10");
         AirGradeWrapper pm10_wrapper = AirGradeManager.getPM10(pm10_detail);
-        main_pm10_face.setImageResource(pm10_wrapper.getFaceId());
+        main_pm10_face.setBackgroundResource(pm10_wrapper.getFaceId());
         main_pm10_quality.setText(pm10_wrapper.getQuality());
         main_pm10_detail.setText(pm10_detail + " ㎍/㎥");
 
         // 초미세먼지
         String pm25_detail = detailData.get("PM25");
         AirGradeWrapper pm25_wrapper = AirGradeManager.getPM10(pm25_detail);
-        main_pm25_face.setImageResource(pm25_wrapper.getFaceId());
+        main_pm25_face.setBackgroundResource(pm25_wrapper.getFaceId());
         main_pm25_quality.setText(pm25_wrapper.getQuality());
         main_pm25_detail.setText(pm25_detail + " ㎍/㎥");
 
         // 오존
         String o3_detail = detailData.get("O3");
         AirGradeWrapper o3_wrapper = AirGradeManager.getO3(o3_detail);
-        main_o3_face.setImageResource(o3_wrapper.getFaceId());
+        main_o3_face.setBackgroundResource(o3_wrapper.getFaceId());
         main_o3_quality.setText(o3_wrapper.getQuality());
-        main_o3_detail.setText(o3_detail+ " ppm");
+        main_o3_detail.setText(o3_detail + " ppm");
 
         // 이산화질소
         String no2_detail = detailData.get("NO2");
         AirGradeWrapper no2_wrapper = AirGradeManager.getO3(no2_detail);
-        main_no2_face.setImageResource(no2_wrapper.getFaceId());
+        main_no2_face.setBackgroundResource(no2_wrapper.getFaceId());
         main_no2_quality.setText(no2_wrapper.getQuality());
         main_no2_detail.setText(no2_detail + " ppm");
 
         // 일산화탄소
         String co_detail = detailData.get("CO");
         AirGradeWrapper co_wrapper = AirGradeManager.getCO(co_detail);
-        main_co_face.setImageResource(co_wrapper.getFaceId());
+        main_co_face.setBackgroundResource(co_wrapper.getFaceId());
         main_co_quality.setText(co_wrapper.getQuality());
         main_co_detail.setText(co_detail + " ppm");
 
         // 아황산가스
         String so2_detail = detailData.get("SO2");
         AirGradeWrapper so2_wrapper = AirGradeManager.getSO2(so2_detail);
-        main_so2_face.setImageResource(so2_wrapper.getFaceId());
+        main_so2_face.setBackgroundResource(so2_wrapper.getFaceId());
         main_so2_quality.setText(so2_wrapper.getQuality());
         main_so2_detail.setText(so2_detail + " ppm");
     }
