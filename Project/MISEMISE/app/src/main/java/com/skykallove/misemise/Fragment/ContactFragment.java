@@ -18,6 +18,12 @@ public class ContactFragment extends Fragment {
         // Required empty public constructor
     }
 
+    private static ContactFragment instance = null;
+
+    public static  ContactFragment create() {
+        return (instance == null ? instance = new ContactFragment() : instance);
+    }
+
     Button sendButton;
 
     @Override

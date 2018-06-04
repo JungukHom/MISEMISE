@@ -12,11 +12,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.skykallove.misemise.Fragment.AlarmFragment;
 import com.skykallove.misemise.Fragment.ContactFragment;
@@ -25,13 +22,7 @@ import com.skykallove.misemise.Fragment.SettingsFragment;
 import com.skykallove.misemise.Fragment.ShareFragment;
 import com.skykallove.misemise.Fragment.WHOFragment;
 import com.skykallove.misemise.Fragment.WeFragment;
-import com.skykallove.misemise.Manager.AsyncManager;
-import com.skykallove.misemise.Manager.JSONManager;
-import com.skykallove.misemise.TrashCan.WrapManager;
 import com.skykallove.misemise.R;
-import com.skykallove.misemise.Data.Url;
-
-import java.util.Map;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -43,7 +34,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        replaceFragment(new MainFragment());
+        replaceFragment(MainFragment.create());
 
         setTitle("");
 //        Log.i("test_a", a);
@@ -115,19 +106,19 @@ public class MainActivity extends AppCompatActivity
         }
 
         if (id == R.id.nav_main) {
-            fragment = new MainFragment();
+            fragment = MainFragment.create();
         } else if (id == R.id.nav_who) {
-            fragment = new WHOFragment();
+            fragment = WHOFragment.create();
         } else if (id == R.id.nav_we) {
-            fragment = new WeFragment();
+            fragment = WeFragment.create();
         } else if (id == R.id.nav_alarm) {
-            fragment = new AlarmFragment();
+            fragment = AlarmFragment.create();
         } else if (id == R.id.nav_share) {
-            fragment = new ShareFragment();
+            fragment = ShareFragment.create();
         } else if (id == R.id.nav_contact) {
-            fragment = new ContactFragment();
+            fragment = ContactFragment.create();
         } else if (id == R.id.nav_settings) {
-            fragment = new SettingsFragment();
+            fragment = SettingsFragment.create();
         }
 
         if (replaceFragment(fragment)) {

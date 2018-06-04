@@ -2,6 +2,7 @@ package com.skykallove.misemise.Fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +16,9 @@ import com.skykallove.misemise.Manager.AirGradeWrapper;
 import com.skykallove.misemise.Manager.AsyncManager;
 import com.skykallove.misemise.Manager.JSONManager;
 import com.skykallove.misemise.R;
-import com.skykallove.misemise.TrashCan.WrapManager;
+import com.skykallove.misemise.Manager.URLParameterManager;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -26,7 +28,13 @@ public class MainFragment extends Fragment {
         // Required empty public constructor
     }
 
-    List<LinearLayout> backgroundList;
+    private static MainFragment instance = null;
+
+    public static  MainFragment create() {
+        return (instance == null ? instance = new MainFragment() : instance);
+    }
+
+    List<LinearLayout> backgroundList = new ArrayList<>();
 
     LinearLayout main_whole_background;
     LinearLayout main_title;
@@ -106,14 +114,17 @@ public class MainFragment extends Fragment {
         addBackgroundList();
 
         AsyncManager manager = AsyncManager.getInstance();
-        String a = manager.make(Url.TEST, WrapManager.getRequestString("서북권", "서대문구"));
+        String a = manager.make(Url.TEST, URLParameterManager.getRequestString("서북권", "서대문구"));
 
         Map<String, String> parsedData = JSONManager.parse(a);
         setTitleData(parsedData);
         setDetailData(parsedData);
 
         // 통합대기환경등급을 비교해 background color change
-        // setBackgroundColor(parsedData.get("IDEX_NM").get);
+        String titleQuality = parsedData.get("IDEX_NM");
+
+
+        setBackgroundColor(AirGradeManager.getBackgroundColorId(titleQuality));
 
         return view;
     }
@@ -139,7 +150,6 @@ public class MainFragment extends Fragment {
     }
 
     private void findBackgrounds() {
-
         main_whole_background = (LinearLayout) view.findViewById(R.id.main_whole_background);
         main_title = (LinearLayout) view.findViewById(R.id.main_title);
         main_detail = (LinearLayout) view.findViewById(R.id.main_detail);
@@ -194,52 +204,73 @@ public class MainFragment extends Fragment {
     }
 
     private void setTitleData(Map<String, String> titleData) {
+        String year = titleData.get("MSRDT").substring(0, 4);
+        String month = titleData.get("MSRDT").substring(4, 6);
+        String day = titleData.get("MSRDT").substring(6, 8);
+        String hour = titleData.get("MSRDT").substring(8, 10);
+        String minute = titleData.get("MSRDT").substring(10, 12);
+
+        StringBuilder date = new StringBuilder();
+        date.append("측정일시 : ")
+                .append(year)
+                .append("-")
+                .append(month)
+                .append("-")
+                .append(day)
+                .append(" ")
+                .append(hour)
+                .append(":")
+                .append(minute);
+
         location.setText(titleData.get("MSRRGN_NM") + " " + titleData.get("MSRSTE_NM"));
-        time.setText("측정일시 : " + titleData.get("MSRDT").toString());
+        time.setText(date);
+        // TODO: 2018-06-04 face, quality message
 //        face;
         quality.setText(titleData.get("IDEX_NM"));
 //        qualityMessage;
+
+        // titleData.get("MSRDT")
     }
 
     private void setDetailData(Map<String, String> detailData) {
         // 미세먼지
         String pm10_detail = detailData.get("PM10");
-        AirGradeWrapper pm10_wrapper = AirGradeManager.getPM10(pm10_detail);
+        AirGradeWrapper pm10_wrapper = AirGradeManager.get("PM10", pm10_detail);
         main_pm10_face.setBackgroundResource(pm10_wrapper.getFaceId());
         main_pm10_quality.setText(pm10_wrapper.getQuality());
         main_pm10_detail.setText(pm10_detail + " ㎍/㎥");
 
         // 초미세먼지
         String pm25_detail = detailData.get("PM25");
-        AirGradeWrapper pm25_wrapper = AirGradeManager.getPM10(pm25_detail);
+        AirGradeWrapper pm25_wrapper = AirGradeManager.get("PM25", pm25_detail);
         main_pm25_face.setBackgroundResource(pm25_wrapper.getFaceId());
         main_pm25_quality.setText(pm25_wrapper.getQuality());
         main_pm25_detail.setText(pm25_detail + " ㎍/㎥");
 
         // 오존
         String o3_detail = detailData.get("O3");
-        AirGradeWrapper o3_wrapper = AirGradeManager.getO3(o3_detail);
+        AirGradeWrapper o3_wrapper = AirGradeManager.get("O3", o3_detail);
         main_o3_face.setBackgroundResource(o3_wrapper.getFaceId());
         main_o3_quality.setText(o3_wrapper.getQuality());
         main_o3_detail.setText(o3_detail + " ppm");
 
         // 이산화질소
         String no2_detail = detailData.get("NO2");
-        AirGradeWrapper no2_wrapper = AirGradeManager.getO3(no2_detail);
+        AirGradeWrapper no2_wrapper = AirGradeManager.get("NO2", no2_detail);
         main_no2_face.setBackgroundResource(no2_wrapper.getFaceId());
         main_no2_quality.setText(no2_wrapper.getQuality());
         main_no2_detail.setText(no2_detail + " ppm");
 
         // 일산화탄소
         String co_detail = detailData.get("CO");
-        AirGradeWrapper co_wrapper = AirGradeManager.getCO(co_detail);
+        AirGradeWrapper co_wrapper = AirGradeManager.get("CO", co_detail);
         main_co_face.setBackgroundResource(co_wrapper.getFaceId());
         main_co_quality.setText(co_wrapper.getQuality());
         main_co_detail.setText(co_detail + " ppm");
 
         // 아황산가스
         String so2_detail = detailData.get("SO2");
-        AirGradeWrapper so2_wrapper = AirGradeManager.getSO2(so2_detail);
+        AirGradeWrapper so2_wrapper = AirGradeManager.get("SO2", so2_detail);
         main_so2_face.setBackgroundResource(so2_wrapper.getFaceId());
         main_so2_quality.setText(so2_wrapper.getQuality());
         main_so2_detail.setText(so2_detail + " ppm");

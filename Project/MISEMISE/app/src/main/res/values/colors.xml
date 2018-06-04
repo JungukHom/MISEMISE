@@ -9,4 +9,17 @@
 
     <!-- main -->
     <color name="main_text">#FFFFFF</color>
+
+    <!-- Air Grade color -->
+    <color name="grade_01">#115cd6</color>
+    <color name="grade_02">#3d84f7</color>
+    <color name="grade_03">#8ab4f7</color>
+
+    <color name="grade_04">#60ce31</color>
+
+    <color name="grade_05">#cc702a</color>
+    <color name="grade_06">#b2450a</color>
+    <color name="grade_07">#db231a</color>
+
+    <color name="grade_08">#000000</color>
 </resources>

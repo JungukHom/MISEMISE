@@ -16,6 +16,12 @@ public class WHOFragment extends Fragment {
         // Required empty public constructor
     }
 
+    private static WHOFragment instance = null;
+
+    public static  WHOFragment create() {
+        return (instance == null ? instance = new WHOFragment() : instance);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

@@ -16,6 +16,12 @@ public class ShareFragment extends Fragment {
         // Required empty public constructor
     }
 
+    private static ShareFragment instance = null;
+
+    public static  ShareFragment create() {
+        return (instance == null ? instance = new ShareFragment() : instance);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

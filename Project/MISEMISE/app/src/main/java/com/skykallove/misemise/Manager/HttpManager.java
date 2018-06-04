@@ -70,9 +70,6 @@ public class HttpManager {
             _url += params.get("msrrgn") + "/" + params.get("msrste");
         }
 
-        // TODO: 2018-05-29
-        Log.i("test", _url);
-
         try {
             URL url = new URL(_url);
             connection = (HttpURLConnection) url.openConnection();

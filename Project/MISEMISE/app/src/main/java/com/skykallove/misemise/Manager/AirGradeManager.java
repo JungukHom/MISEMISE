@@ -1,5 +1,6 @@
 package com.skykallove.misemise.Manager;
 
+import android.graphics.Color;
 import android.util.Log;
 
 import com.skykallove.misemise.R;
@@ -9,6 +10,9 @@ import com.skykallove.misemise.R;
  */
 
 public class AirGradeManager {
+
+    private AirGradeManager() {
+    }
 
     public static AirGradeWrapper get(String type, String data) {
         AirGradeWrapper result;
@@ -36,6 +40,47 @@ public class AirGradeManager {
                 break;
         }
         return result;
+    }
+
+    public static int getBackgroundColorId(String data) {
+        int id;
+            switch (data) {
+            case "최고":
+                id = R.color.grade_01;
+                break;
+
+            case "좋음":
+                id = R.color.grade_02;
+                break;
+
+            case "양호":
+                id = R.color.grade_03;
+                break;
+
+            case "보통":
+                id = R.color.grade_04;
+                break;
+
+            case "나쁨":
+                id = R.color.grade_05;
+                break;
+
+            case "상당히 나쁨":
+                id = R.color.grade_06;
+                break;
+
+            case "매우 나쁨":
+                id = R.color.grade_07;
+                break;
+
+            case "최악":
+                id = R.color.grade_08;
+                break;
+
+            default:
+                id = R.color.white;
+        }
+        return id;
     }
 
     public static AirGradeWrapper getPM10(String pm10) {

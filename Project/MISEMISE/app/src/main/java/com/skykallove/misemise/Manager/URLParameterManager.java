@@ -1,4 +1,4 @@
-package com.skykallove.misemise.TrashCan;
+package com.skykallove.misemise.Manager;
 
 import android.content.ContentValues;
 
@@ -6,7 +6,7 @@ import android.content.ContentValues;
  * Created by sky on 2018-05-29.
  */
 
-public class WrapManager {
+public class URLParameterManager {
 
     private static String KEY = "5650416567736b793532486c4c7a71";
     private static String TYPE = "xml";

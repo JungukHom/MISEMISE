@@ -16,6 +16,12 @@ public class SettingsFragment extends Fragment {
         // Required empty public constructor
     }
 
+    private static SettingsFragment instance = null;
+
+    public static  SettingsFragment create() {
+        return (instance == null ? instance = new SettingsFragment() : instance);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

@@ -16,6 +16,12 @@ public class WeFragment extends Fragment {
         // Required empty public constructor
     }
 
+    private static WeFragment instance = null;
+
+    public static  WeFragment create() {
+        return (instance == null ? instance = new WeFragment() : instance);
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

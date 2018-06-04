@@ -16,6 +16,11 @@ public class AlarmFragment extends Fragment {
         // Required empty public constructor
     }
 
+    private static AlarmFragment instance = null;
+
+    public static  AlarmFragment create() {
+        return (instance == null ? instance = new AlarmFragment() : instance);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
