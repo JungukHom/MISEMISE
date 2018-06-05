@@ -18,7 +18,7 @@ public class ShareFragment extends Fragment {
 
     private static ShareFragment instance = null;
 
-    public static  ShareFragment create() {
+    public static  ShareFragment getInstance() {
         return (instance == null ? instance = new ShareFragment() : instance);
     }
 

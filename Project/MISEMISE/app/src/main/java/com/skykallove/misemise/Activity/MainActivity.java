@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        replaceFragment(MainFragment.create());
+        replaceFragment(MainFragment.getInstance());
 
         setTitle("");
 //        Log.i("test_a", a);
@@ -106,19 +106,19 @@ public class MainActivity extends AppCompatActivity
         }
 
         if (id == R.id.nav_main) {
-            fragment = MainFragment.create();
+            fragment = MainFragment.getInstance();
         } else if (id == R.id.nav_who) {
-            fragment = WHOFragment.create();
+            fragment = WHOFragment.getInstance();
         } else if (id == R.id.nav_we) {
-            fragment = WeFragment.create();
+            fragment = WeFragment.getInstance();
         } else if (id == R.id.nav_alarm) {
-            fragment = AlarmFragment.create();
+            fragment = AlarmFragment.getInstance();
         } else if (id == R.id.nav_share) {
-            fragment = ShareFragment.create();
+            fragment = ShareFragment.getInstance();
         } else if (id == R.id.nav_contact) {
-            fragment = ContactFragment.create();
+            fragment = ContactFragment.getInstance();
         } else if (id == R.id.nav_settings) {
-            fragment = SettingsFragment.create();
+            fragment = SettingsFragment.getInstance();
         }
 
         if (replaceFragment(fragment)) {

@@ -18,7 +18,7 @@ public class SettingsFragment extends Fragment {
 
     private static SettingsFragment instance = null;
 
-    public static  SettingsFragment create() {
+    public static  SettingsFragment getInstance() {
         return (instance == null ? instance = new SettingsFragment() : instance);
     }
 

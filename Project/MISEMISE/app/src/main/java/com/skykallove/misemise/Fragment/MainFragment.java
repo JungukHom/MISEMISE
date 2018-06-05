@@ -30,7 +30,7 @@ public class MainFragment extends Fragment {
 
     private static MainFragment instance = null;
 
-    public static  MainFragment create() {
+    public static  MainFragment getInstance() {
         return (instance == null ? instance = new MainFragment() : instance);
     }
 

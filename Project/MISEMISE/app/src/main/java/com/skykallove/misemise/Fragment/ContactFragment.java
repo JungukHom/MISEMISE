@@ -20,7 +20,7 @@ public class ContactFragment extends Fragment {
 
     private static ContactFragment instance = null;
 
-    public static  ContactFragment create() {
+    public static  ContactFragment getInstance() {
         return (instance == null ? instance = new ContactFragment() : instance);
     }
 

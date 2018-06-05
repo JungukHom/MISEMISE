@@ -18,7 +18,7 @@ public class WHOFragment extends Fragment {
 
     private static WHOFragment instance = null;
 
-    public static  WHOFragment create() {
+    public static  WHOFragment getInstance() {
         return (instance == null ? instance = new WHOFragment() : instance);
     }
 

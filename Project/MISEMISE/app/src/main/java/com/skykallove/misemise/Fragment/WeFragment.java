@@ -18,7 +18,7 @@ public class WeFragment extends Fragment {
 
     private static WeFragment instance = null;
 
-    public static  WeFragment create() {
+    public static  WeFragment getInstance() {
         return (instance == null ? instance = new WeFragment() : instance);
     }
 
