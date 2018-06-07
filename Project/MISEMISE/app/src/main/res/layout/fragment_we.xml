@@ -4,4 +4,61 @@
     android:layout_height="match_parent"
     tools:context="com.skykallove.misemise.Fragment.WeFragment">
 
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="#56e3e4">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textSize="25dp"
+                    android:textStyle="bold"
+                    android:textColor="#ffffff"
+                    android:layout_marginLeft="35dp"
+                    android:layout_marginRight="35dp"
+                    android:text="미세미세 8 단계\n" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="17dp"
+                    android:textColor="#ffffff"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginLeft="25dp"
+                    android:text="@string/we_explain_01"/>
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="180dp"
+                    android:src="@drawable/step"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="17dp"
+                    android:textColor="#ffffff"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginLeft="25dp"
+                    android:text="@string/we_explain_02"/>
+
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+
 </FrameLayout>
