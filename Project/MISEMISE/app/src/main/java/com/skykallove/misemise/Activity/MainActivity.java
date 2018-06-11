@@ -12,6 +12,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -27,14 +28,21 @@ import com.skykallove.misemise.R;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private int currentFragment = R.id.nav_main;
+    private int currentFragmentID = R.id.nav_main;
+    public Fragment currentFragment = null;
+    public static MainActivity instance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        replaceFragment(MainFragment.getInstance());
+        // Intent alarmService = new Intent(getApplicationContext(), AlarmService.class);
+        // startService(alarmService);
+
+        instance = this;
+
+        replaceFragment(MainFragment.getInstance(), R.layout.fragment_main);
 
         setTitle("");
 //        Log.i("test_a", a);
@@ -100,7 +108,7 @@ public class MainActivity extends AppCompatActivity
 
         int id = item.getItemId();
 
-        if (id == currentFragment) {
+        if (id == currentFragmentID) {
             closeDrawer();
             return false;
         }
@@ -121,22 +129,23 @@ public class MainActivity extends AppCompatActivity
             fragment = SettingsFragment.getInstance();
         }
 
-        if (replaceFragment(fragment)) {
-            currentFragment = id;
-        }
+        replaceFragment(fragment, id);
 
         closeDrawer();
         return true;
     }
 
-    private boolean replaceFragment(Fragment fragment) {
+    public void replaceFragment(Fragment fragment, int resID) {
         if (fragment != null) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.content_fragment_layout, fragment);
             ft.commit();
-            return true;
-        } else {
-            return false;
+
+            currentFragmentID = resID;
+            currentFragment = fragment;
+        }
+        else {
+            Log.i("test", "fragment is null");
         }
     }
 

@@ -22,4 +22,16 @@
     <color name="grade_07">#db231a</color>
 
     <color name="grade_08">#000000</color>
+
+    <color name="grade_01_thick">#115cd6</color>
+    <color name="grade_02_thick">#3d84f7</color>
+    <color name="grade_03_thick">#8ab4f7</color>
+
+    <color name="grade_04_thick">#60ce31</color>
+
+    <color name="grade_05_thick">#cc702a</color>
+    <color name="grade_06_thick">#b2450a</color>
+    <color name="grade_07_thick">#db231a</color>
+
+    <color name="grade_08_thick">#000000</color>
 </resources>

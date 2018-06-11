@@ -9,10 +9,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.skykallove.misemise.Data.Url;
 import com.skykallove.misemise.Manager.AirGradeManager;
 import com.skykallove.misemise.Manager.AirGradeWrapper;
+import com.skykallove.misemise.Manager.AnimationManager;
 import com.skykallove.misemise.Manager.AsyncManager;
 import com.skykallove.misemise.Manager.JSONManager;
 import com.skykallove.misemise.R;
@@ -30,7 +32,7 @@ public class MainFragment extends Fragment {
 
     private static MainFragment instance = null;
 
-    public static  MainFragment getInstance() {
+    public static MainFragment getInstance() {
         return (instance == null ? instance = new MainFragment() : instance);
     }
 
@@ -41,6 +43,10 @@ public class MainFragment extends Fragment {
     LinearLayout main_detail;
     LinearLayout main_advertisement;
     LinearLayout main_more_detail;
+
+    TextView main_bar_now;
+    TextView main_bar_advertise;
+    TextView main_bar_detail;
 
     // main_title
     TextView location;
@@ -133,6 +139,9 @@ public class MainFragment extends Fragment {
         findBackgrounds();
         findTitles();
         findDetails();
+        findBars();
+
+        setOnClickListeners();
     }
 
     private void addBackgroundList() {
@@ -203,12 +212,29 @@ public class MainFragment extends Fragment {
         main_so2_detail = (TextView) view.findViewById(R.id.main_so2_detail);
     }
 
+    private void findBars() {
+        main_bar_now = (TextView) view.findViewById(R.id.main_bar_now);
+        main_bar_advertise = (TextView) view.findViewById(R.id.main_bar_advertise);
+        main_bar_detail = (TextView) view.findViewById(R.id.main_bar_detail);
+    }
+
+    private  void setOnClickListeners() {
+        face.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // // TODO: 2018-06-09 Set title face animation
+                AnimationManager.setAnimation(face, R.anim.shake);
+            }
+        });
+    }
+
     private void setTitleData(Map<String, String> titleData) {
-        String year = titleData.get("MSRDT").substring(0, 4);
-        String month = titleData.get("MSRDT").substring(4, 6);
-        String day = titleData.get("MSRDT").substring(6, 8);
-        String hour = titleData.get("MSRDT").substring(8, 10);
-        String minute = titleData.get("MSRDT").substring(10, 12);
+        String strDate = titleData.get("MSRDT");
+        String year = strDate.substring(0, 4);
+        String month = strDate.substring(4, 6);
+        String day = strDate.substring(6, 8);
+        String hour = strDate.substring(8, 10);
+        String minute = strDate.substring(10, 12);
 
         StringBuilder date = new StringBuilder();
         date.append("측정일시 : ")
