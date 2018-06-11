@@ -15,11 +15,12 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.skykallove.misemise.Fragment.AlarmFragment;
 import com.skykallove.misemise.Fragment.ContactFragment;
 import com.skykallove.misemise.Fragment.MainFragment;
-import com.skykallove.misemise.Fragment.SettingsFragment;
 import com.skykallove.misemise.Fragment.ShareFragment;
 import com.skykallove.misemise.Fragment.WHOFragment;
 import com.skykallove.misemise.Fragment.WeFragment;
@@ -28,7 +29,7 @@ import com.skykallove.misemise.R;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private int currentFragmentID = R.id.nav_main;
+    public int currentFragmentID = R.id.nav_main;
     public Fragment currentFragment = null;
     public static MainActivity instance;
 
@@ -41,6 +42,8 @@ public class MainActivity extends AppCompatActivity
         // startService(alarmService);
 
         instance = this;
+
+        setActionBarColor();
 
         replaceFragment(MainFragment.getInstance(), R.layout.fragment_main);
 
@@ -65,6 +68,13 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         // basic codes
+    }
+
+    private void setActionBarColor () {
+        Window window = getWindow();
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(getResources().getColor(R.color.black));
     }
 
     @Override
@@ -125,8 +135,6 @@ public class MainActivity extends AppCompatActivity
             fragment = ShareFragment.getInstance();
         } else if (id == R.id.nav_contact) {
             fragment = ContactFragment.getInstance();
-        } else if (id == R.id.nav_settings) {
-            fragment = SettingsFragment.getInstance();
         }
 
         replaceFragment(fragment, id);

@@ -28,11 +28,6 @@
             android:id="@+id/nav_contact"
             android:icon="@drawable/face_06"
             android:title="@string/nav_contact" />
-
-        <item
-            android:id="@+id/nav_settings"
-            android:icon="@drawable/face_07"
-            android:title="@string/nav_manage" />
     </group>
 
 </menu>

@@ -14,6 +14,15 @@ public class AirGradeManager {
     private AirGradeManager() {
     }
 
+    public static final String GRADE_01 = "외출을 지향 합니다!";
+    public static final String GRADE_02 = "신선한 공기 많이 마시세요~";
+    public static final String GRADE_03 = "환기 한 번 하세요~";
+    public static final String GRADE_04 = "마스크는 필요없어요!";
+    public static final String GRADE_05 = "마스크 꼭 챙기세요!";
+    public static final String GRADE_06 = "외출은 삼가하세요!";
+    public static final String GRADE_07 = "미세먼지 폭탄이에요!";
+    public static final String GRADE_08 = "최악!! 집 밖은 위험해요!";
+
     public static AirGradeWrapper get(String type, String data) {
         AirGradeWrapper result;
         switch (type) {
@@ -21,7 +30,7 @@ public class AirGradeManager {
                 result = getPM10(data);
                 break;
             case "PM25":
-                result = getPM10(data);
+                result = getPM25(data);
                 break;
             case "O3":
                 result = getO3(data);
@@ -42,45 +51,190 @@ public class AirGradeManager {
         return result;
     }
 
-    public static int getBackgroundColorId(String data) {
+    public static int getGradeWithWholeValue(int value) {
+        int result;
+        if (value > 00 && value <= 10) {
+            result = 1;
+        } else if (value > 10 && value <= 20) {
+            result = 2;
+        } else if (value > 20 && value <= 30) {
+            result = 3;
+        } else if (value > 30 && value <= 40) {
+            result = 4;
+        } else if (value > 40 && value <= 50) {
+            result = 5;
+        } else if (value > 50 && value <= 60) {
+            result = 6;
+        } else if (value > 60 && value <= 70) {
+            result = 7;
+        } else {
+            result = 8;
+        }
+        return result;
+    }
+
+    public static int getBackgroundColorIdWithGrade(int grade, boolean isThick) {
         int id;
-            switch (data) {
-            case "최고":
-                id = R.color.grade_01;
+        if (isThick) {
+            switch (grade) {
+                case 1:
+                    id = R.color.grade_01_thick;
+                    break;
+
+                case 2:
+                    id = R.color.grade_02_thick;
+                    break;
+
+                case 3:
+                    id = R.color.grade_03_thick;
+                    break;
+
+                case 4:
+                    id = R.color.grade_04_thick;
+                    break;
+
+                case 5:
+                    id = R.color.grade_05_thick;
+                    break;
+
+                case 6:
+                    id = R.color.grade_06_thick;
+                    break;
+
+                case 7:
+                    id = R.color.grade_07_thick;
+                    break;
+
+                case 8:
+                    id = R.color.grade_08_thick;
+                    break;
+
+                default:
+                    id = R.color.white;
+            }
+        } else {
+            switch (grade) {
+                case 1:
+                    id = R.color.grade_01;
+                    break;
+
+                case 2:
+                    id = R.color.grade_02;
+                    break;
+
+                case 3:
+                    id = R.color.grade_03;
+                    break;
+
+                case 4:
+                    id = R.color.grade_04;
+                    break;
+
+                case 5:
+                    id = R.color.grade_05;
+                    break;
+
+                case 6:
+                    id = R.color.grade_06;
+                    break;
+
+                case 7:
+                    id = R.color.grade_07;
+                    break;
+
+                case 8:
+                    id = R.color.grade_08;
+                    break;
+
+                default:
+                    id = R.color.white;
+            }
+        }
+        return id;
+    }
+
+    public static String getGradeMessageWithGrade(int grade) {
+        String result;
+        switch (grade) {
+            case 1:
+                result = GRADE_01;
                 break;
 
-            case "좋음":
-                id = R.color.grade_02;
+            case 2:
+                result = GRADE_02;
                 break;
 
-            case "양호":
-                id = R.color.grade_03;
+            case 3:
+                result = GRADE_03;
                 break;
 
-            case "보통":
-                id = R.color.grade_04;
+            case 4:
+                result = GRADE_04;
                 break;
 
-            case "나쁨":
-                id = R.color.grade_05;
+            case 5:
+                result = GRADE_05;
                 break;
 
-            case "상당히 나쁨":
-                id = R.color.grade_06;
+            case 6:
+                result = GRADE_06;
                 break;
 
-            case "매우 나쁨":
-                id = R.color.grade_07;
+            case 7:
+                result = GRADE_07;
                 break;
 
-            case "최악":
-                id = R.color.grade_08;
+            case 8:
+                result = GRADE_08;
                 break;
 
             default:
-                id = R.color.white;
+                result = "미세먼지 정보를 불러오는 중 오류가 발생하였습니다.";
         }
-        return id;
+
+        return result;
+    }
+
+    public static int getGradeImageIdWithGrade(int grade) {
+        int result;
+        switch (grade) {
+            case 1:
+                result = R.drawable.face_01;
+                break;
+
+            case 2:
+                result = R.drawable.face_02;
+                break;
+
+            case 3:
+                result = R.drawable.face_03;
+                break;
+
+            case 4:
+                result = R.drawable.face_04;
+                break;
+
+            case 5:
+                result = R.drawable.face_05;
+                break;
+
+            case 6:
+                result = R.drawable.face_06;
+                break;
+
+            case 7:
+                result = R.drawable.face_07;
+                break;
+
+            case 8:
+                result = R.drawable.face_08;
+                break;
+
+            default:
+                result = R.drawable.face_01;
+        }
+
+        return result;
     }
 
     public static AirGradeWrapper getPM10(String pm10) {

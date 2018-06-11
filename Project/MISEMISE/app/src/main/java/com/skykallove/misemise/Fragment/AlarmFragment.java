@@ -56,7 +56,7 @@ public class AlarmFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // TODO: 2018-06-05
-                MainActivity.instance.replaceFragment(AddAlarmFragment.getInstance());
+                MainActivity.instance.replaceFragment(AddAlarmFragment.getInstance(), R.layout.fragment_alarm);
             }
         });
     }

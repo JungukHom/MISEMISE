@@ -85,7 +85,7 @@ public class AddAlarmFragment extends Fragment {
     }
 
     private void goBackToAlarmFragment() {
-        mainActivity.replaceFragment(mainActivity.currentFragment);
+        mainActivity.replaceFragment(mainActivity.currentFragment, mainActivity.currentFragmentID);
     }
 
     private void saveAlarmInfo() {

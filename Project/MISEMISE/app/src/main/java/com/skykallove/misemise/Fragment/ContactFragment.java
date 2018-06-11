@@ -51,6 +51,5 @@ public class ContactFragment extends Fragment {
         email.putExtra(Intent.EXTRA_SUBJECT,"MISEMISE 문의");
         email.putExtra(Intent.EXTRA_TEXT,"여기에 입력해 주세요.\n");
         startActivity(email);
-
     }
 }

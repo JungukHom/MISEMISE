@@ -11,27 +11,24 @@
     <color name="main_text">#FFFFFF</color>
 
     <!-- Air Grade color -->
-    <color name="grade_01">#115cd6</color>
-    <color name="grade_02">#3d84f7</color>
-    <color name="grade_03">#8ab4f7</color>
+    <color name="grade_01">#0073d0</color>
+    <color name="grade_02">#00bae6</color>
+    <color name="grade_03">#00d5e6</color>
+    <color name="grade_04">#00d575</color>
 
-    <color name="grade_04">#60ce31</color>
+    <color name="grade_05">#f9a60d</color>
+    <color name="grade_06">#fe6e24</color>
+    <color name="grade_07">#fe3124</color>
+    <color name="grade_08">#808080</color>
 
-    <color name="grade_05">#cc702a</color>
-    <color name="grade_06">#b2450a</color>
-    <color name="grade_07">#db231a</color>
+    <color name="grade_01_thick">#004d8c</color>
+    <color name="grade_02_thick">#006982</color>
+    <color name="grade_03_thick">#007a84</color>
+    <color name="grade_04_thick">#008247</color>
 
-    <color name="grade_08">#000000</color>
-
-    <color name="grade_01_thick">#115cd6</color>
-    <color name="grade_02_thick">#3d84f7</color>
-    <color name="grade_03_thick">#8ab4f7</color>
-
-    <color name="grade_04_thick">#60ce31</color>
-
-    <color name="grade_05_thick">#cc702a</color>
-    <color name="grade_06_thick">#b2450a</color>
-    <color name="grade_07_thick">#db231a</color>
-
+    <color name="grade_05_thick">#916007</color>
+    <color name="grade_06_thick">#913e14</color>
+    <color name="grade_07_thick">#961c15</color>
     <color name="grade_08_thick">#000000</color>
+
 </resources>

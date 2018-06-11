@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:allowBackup="true"
@@ -18,6 +19,8 @@
             android:name=".Activity.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="com.google.android.gms.version"
+                android:value="@integer/google_play_services_version" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,6 +28,11 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="com.google.android.gms.ads.AdActivity"
+
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+
+            android:theme="@android:style/Theme.Translucent" />
         <receiver android:name=".Service.RestartService">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>

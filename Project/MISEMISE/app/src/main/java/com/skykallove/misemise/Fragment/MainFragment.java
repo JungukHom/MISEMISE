@@ -2,7 +2,6 @@ package com.skykallove.misemise.Fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +10,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.skykallove.misemise.Data.Url;
 import com.skykallove.misemise.Manager.AirGradeManager;
 import com.skykallove.misemise.Manager.AirGradeWrapper;
@@ -92,6 +93,21 @@ public class MainFragment extends Fragment {
     TextView main_so2_quality;
     TextView main_so2_detail;
 
+    TextView main_detail_update_time;
+    TextView main_detail_pm10;
+    TextView main_detail_pm25;
+
+    TextView main_detail_o3;
+    TextView main_detail_no2;
+    TextView main_detail_co;
+
+    TextView main_detail_so2;
+    // TextView main_detail_pm10_measure;
+    // TextView main_detail_pm25_measure;
+
+    TextView main_detail_whole_value;
+    TextView main_detail_whole_state;
+
     /*
     msrdt 측정일시
     msrrgn_nm 권영멱
@@ -111,6 +127,8 @@ public class MainFragment extends Fragment {
 
     View view;
 
+    private int wholeGrade;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -123,14 +141,21 @@ public class MainFragment extends Fragment {
         String a = manager.make(Url.TEST, URLParameterManager.getRequestString("서북권", "서대문구"));
 
         Map<String, String> parsedData = JSONManager.parse(a);
-        setTitleData(parsedData);
-        setDetailData(parsedData);
 
         // 통합대기환경등급을 비교해 background color change
-        String titleQuality = parsedData.get("IDEX_NM");
+        String titleQuality = parsedData.get("IDEX_MVL");
+        int titleQualityInt = Integer.parseInt(titleQuality);
+        wholeGrade = AirGradeManager.getGradeWithWholeValue(titleQualityInt);
 
+        AdView mAdView = (AdView) view.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
-        setBackgroundColor(AirGradeManager.getBackgroundColorId(titleQuality));
+        // data set
+        setTitleData(parsedData);
+        setDetailData(parsedData);
+        setMoreDetailData(parsedData);
+        setBackgroundColor(AirGradeManager.getBackgroundColorIdWithGrade(wholeGrade, false));
 
         return view;
     }
@@ -139,6 +164,7 @@ public class MainFragment extends Fragment {
         findBackgrounds();
         findTitles();
         findDetails();
+        findMoreDetails();
         findBars();
 
         setOnClickListeners();
@@ -163,7 +189,7 @@ public class MainFragment extends Fragment {
         main_title = (LinearLayout) view.findViewById(R.id.main_title);
         main_detail = (LinearLayout) view.findViewById(R.id.main_detail);
         main_advertisement = (LinearLayout) view.findViewById(R.id.main_advertisement);
-        main_more_detail = (LinearLayout) view.findViewById(R.id.main_more_detail);
+        main_more_detail = (LinearLayout) view.findViewById(R.id.main_more_detail_explain);
     }
 
     private void findTitles() {
@@ -212,23 +238,41 @@ public class MainFragment extends Fragment {
         main_so2_detail = (TextView) view.findViewById(R.id.main_so2_detail);
     }
 
+    private void findMoreDetails() {
+        main_detail_update_time = (TextView) view.findViewById(R.id.main_detail_update_time);
+        main_detail_pm10 = (TextView) view.findViewById(R.id.main_detail_pm10);
+        main_detail_pm25 = (TextView) view.findViewById(R.id.main_detail_pm25);
+
+        main_detail_o3 = (TextView) view.findViewById(R.id.main_detail_o3);
+        main_detail_no2 = (TextView) view.findViewById(R.id.main_detail_no2);
+        main_detail_co = (TextView) view.findViewById(R.id.main_detail_co);
+
+        main_detail_so2 = (TextView) view.findViewById(R.id.main_detail_so2);
+        // main_detail_pm10_measure = (TextView) view.findViewById(R.id.main_detail_pm10_measure);
+        // main_detail_pm25_measure = (TextView) view.findViewById(R.id.main_detail_pm25_measure);
+
+        main_detail_whole_value = (TextView) view.findViewById(R.id.main_detail_whole_value);
+        main_detail_whole_state = (TextView) view.findViewById(R.id.main_detail_whole_state);
+    }
+
     private void findBars() {
         main_bar_now = (TextView) view.findViewById(R.id.main_bar_now);
         main_bar_advertise = (TextView) view.findViewById(R.id.main_bar_advertise);
         main_bar_detail = (TextView) view.findViewById(R.id.main_bar_detail);
     }
 
-    private  void setOnClickListeners() {
+    private void setOnClickListeners() {
         face.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // // TODO: 2018-06-09 Set title face animation
                 AnimationManager.setAnimation(face, R.anim.shake);
+                Toast.makeText(view.getContext(), "abc", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    private void setTitleData(Map<String, String> titleData) {
+    private StringBuilder makeMeasureTimeText(Map<String, String> titleData) {
         String strDate = titleData.get("MSRDT");
         String year = strDate.substring(0, 4);
         String month = strDate.substring(4, 6);
@@ -237,8 +281,7 @@ public class MainFragment extends Fragment {
         String minute = strDate.substring(10, 12);
 
         StringBuilder date = new StringBuilder();
-        date.append("측정일시 : ")
-                .append(year)
+        date.append(year)
                 .append("-")
                 .append(month)
                 .append("-")
@@ -248,12 +291,19 @@ public class MainFragment extends Fragment {
                 .append(":")
                 .append(minute);
 
+        return date;
+    }
+
+    private void setTitleData(Map<String, String> titleData) {
+        String date = makeMeasureTimeText(titleData).toString();
+        String _qualityMessage = AirGradeManager.getGradeMessageWithGrade(wholeGrade);
+        int faceId = AirGradeManager.getGradeImageIdWithGrade(wholeGrade);
+
         location.setText(titleData.get("MSRRGN_NM") + " " + titleData.get("MSRSTE_NM"));
-        time.setText(date);
-        // TODO: 2018-06-04 face, quality message
-//        face;
+        time.setText("측정일시 : " + date);
+        face.setImageResource(faceId);
         quality.setText(titleData.get("IDEX_NM"));
-//        qualityMessage;
+        qualityMessage.setText(_qualityMessage);
 
         // titleData.get("MSRDT")
     }
@@ -300,5 +350,27 @@ public class MainFragment extends Fragment {
         main_so2_face.setBackgroundResource(so2_wrapper.getFaceId());
         main_so2_quality.setText(so2_wrapper.getQuality());
         main_so2_detail.setText(so2_detail + " ppm");
+    }
+
+    private void setMoreDetailData(Map<String, String> detailData) {
+        String date = makeMeasureTimeText(detailData).toString();
+        String measurePlace = detailData.get("MSRSTE_NM");
+        String wholeValue = detailData.get("IDEX_MVL");
+        String wholeState = detailData.get("IDEX_NM");
+
+        main_detail_update_time.setText(date);
+
+        main_detail_pm10.setText(measurePlace);
+        main_detail_pm25.setText(measurePlace);
+        main_detail_o3.setText(measurePlace);
+        main_detail_no2.setText(measurePlace);
+        main_detail_co.setText(measurePlace);
+        main_detail_so2.setText(measurePlace);
+
+        // main_detail_pm10_measure.setText("");
+        // main_detail_pm25_measure.setText("");
+
+        main_detail_whole_value.setText(wholeValue + " unit");
+        main_detail_whole_state.setText(wholeState);
     }
 }
