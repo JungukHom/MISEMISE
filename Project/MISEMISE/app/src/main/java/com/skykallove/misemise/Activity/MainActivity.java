@@ -1,8 +1,16 @@
 package com.skykallove.misemise.Activity;
 
+import android.app.Service;
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -25,25 +33,81 @@ import com.skykallove.misemise.Fragment.ShareFragment;
 import com.skykallove.misemise.Fragment.WHOFragment;
 import com.skykallove.misemise.Fragment.WeFragment;
 import com.skykallove.misemise.R;
+import com.skykallove.misemise.Service.AlarmService;
+import com.skykallove.misemise.Service.RestartService;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private static final String ALARM_PREF_NAME = "alarmPrefName";
+    private static final String ALARM_CITY_NAME = "alarmCityName";
+
     public int currentFragmentID = R.id.nav_main;
     public Fragment currentFragment = null;
-    public static MainActivity instance;
+
+    public static MainActivity instance = null;
+
+    public static List<String> alarmTime = new ArrayList<>();
+
+    public void addAlarmTime(String time) {
+        alarmTime = getAlarmTime();
+        alarmTime.add(time);
+        saveMyAlarmTime(alarmTime);
+    }
+
+    public List<String> getAlarmTime() {
+        SharedPreferences pref = getSharedPreferences(ALARM_PREF_NAME, MODE_PRIVATE);
+        Set<String> _result = pref.getStringSet("alarm", new HashSet<String>());
+
+        List<String> result = new ArrayList<>();
+        for (String str : _result) {
+            result.add(str);
+        }
+        return result;
+    }
+
+    public void saveMyAlarmTime(List<String> info) {
+        SharedPreferences pref = getSharedPreferences(ALARM_PREF_NAME, MODE_PRIVATE);
+        Set<String> values = new HashSet<>();
+        for (int i = 0; i < info.size(); i++) {
+            values.add(info.get(i));
+        }
+
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putStringSet("alarm", values);
+        editor.commit();
+    }
+
+    public int getCityInfo() {
+        SharedPreferences prefs = getSharedPreferences(ALARM_CITY_NAME, MODE_PRIVATE);
+        return prefs.getInt("defaultCity", 0);
+    }
+
+    public void saveCityInfo(int cityIndex) {
+        SharedPreferences prefs = getSharedPreferences(ALARM_CITY_NAME, MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt("defaultCity", cityIndex);
+    }
+
+    public void saveCityInfo(String cityInfo) {
+        SharedPreferences prefs = getSharedPreferences(ALARM_CITY_NAME, MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("defaultCityName", cityInfo);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        // Intent alarmService = new Intent(getApplicationContext(), AlarmService.class);
-        // startService(alarmService);
+        setActionBarColor();
 
         instance = this;
-
-        setActionBarColor();
 
         replaceFragment(MainFragment.getInstance(), R.layout.fragment_main);
 
@@ -68,9 +132,11 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         // basic codes
+
+        startService(new Intent(this, AlarmService.class));
     }
 
-    private void setActionBarColor () {
+    private void setActionBarColor() {
         Window window = getWindow();
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -83,8 +149,11 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            // super.onBackPressed();
-            showFinishAlertDialog();
+            if (currentFragment == MainFragment.getInstance()) {
+                showFinishAlertDialog();
+            } else {
+                replaceFragment(MainFragment.getInstance(), R.layout.fragment_main);
+            }
         }
     }
 
@@ -151,8 +220,7 @@ public class MainActivity extends AppCompatActivity
 
             currentFragmentID = resID;
             currentFragment = fragment;
-        }
-        else {
+        } else {
             Log.i("test", "fragment is null");
         }
     }

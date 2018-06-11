@@ -1,5 +1,6 @@
 package com.skykallove.misemise.Manager;
 
+import android.util.Log;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;

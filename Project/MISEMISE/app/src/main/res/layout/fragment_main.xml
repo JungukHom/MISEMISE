@@ -11,16 +11,16 @@
         android:layout_height="match_parent"
         android:scrollbars="none">
 
+
         <!-- 전체 layout -->
         <LinearLayout
             android:id="@+id/main_whole_background"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="#dd99dd"
             android:gravity="center_horizontal"
             android:orientation="vertical"
-            android:paddingBottom="15dp"
-            android:paddingTop="50dp">
+            android:paddingBottom="15dp">
 
             <!-- 대문정보 layout -->
             <LinearLayout
@@ -32,11 +32,26 @@
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
 
+                <Button
+                    android:id="@+id/main_refresh"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/main_find_other_location"
+                    android:textColor="@color/main_text" />
+
+                <Spinner
+                    android:id="@+id/main_location_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:entries="@array/city"
+                    android:visibility="gone" />
+
                 <TextView
                     android:id="@+id/main_location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="서대문구 남가좌2동"
                     android:textAlignment="center"
                     android:textColor="@color/main_text"
                     android:textSize="25sp" />
@@ -45,7 +60,6 @@
                     android:id="@+id/main_time"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="2018-05-21 09:20PM"
                     android:textAlignment="center"
                     android:textColor="@color/main_text"
                     android:textSize="20sp" />
@@ -54,15 +68,14 @@
                     android:id="@+id/main_face"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="25dp"
-                    android:layout_marginTop="25dp"
-                    android:src ="@drawable/face_01" />
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/face_01" />
 
                 <TextView
                     android:id="@+id/main_air_quality"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="나쁨"
                     android:textAlignment="center"
                     android:textColor="@color/main_text"
                     android:textSize="25sp" />
@@ -71,7 +84,7 @@
                     android:id="@+id/main_air_quality_message"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="공기가 탁하네요. 조심하세요~"
+                    android:layout_marginTop="10dp"
                     android:textAlignment="center"
                     android:textColor="@color/main_text"
                     android:textSize="20sp" />
@@ -80,7 +93,7 @@
 
             <!-- 현재 기상 상황 -->
             <TextView
-                android:id="@+id/main_bar_now"
+                android:id="@+id/main_bar_currentState"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
@@ -399,21 +412,28 @@
             <LinearLayout
                 android:id="@+id/main_advertisement"
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
                 android:background="#88008800"
                 android:gravity="center"
                 android:orientation="vertical">
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ad_example" />
+
+                <!--
+
                 <com.google.android.gms.ads.AdView
                     android:id="@+id/adView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true"
                     ads:adSize="BANNER"
-                    ads:adUnitId="@string/banner_ad_unit_id"></com.google.android.gms.ads.AdView>
+                    ads:adUnitId="@string/banner_ad_unit_id"/>
+
+                -->
 
             </LinearLayout>
 

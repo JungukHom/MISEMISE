@@ -39,12 +39,10 @@ public class AlarmListViewAdapter extends BaseAdapter {
         }
 
         TextView time = (TextView) convertView.findViewById(R.id.item_time);
-        TextView memo = (TextView) convertView.findViewById(R.id.item_memo);
 
         AlarmListItem alarmListItem = listViewItem.get(position);
 
         time.setText(alarmListItem.getTime());
-        memo.setText(alarmListItem.getMemo());
 
         return convertView;
     }
@@ -64,11 +62,10 @@ public class AlarmListViewAdapter extends BaseAdapter {
         return position;
     }
 
-    public void addItem(String time, String memo) {
+    public void addItem(String time) {
         AlarmListItem item = new AlarmListItem();
 
         item.setTime(time);
-        item.setMemo(memo);
 
         listViewItem.add(item);
     }

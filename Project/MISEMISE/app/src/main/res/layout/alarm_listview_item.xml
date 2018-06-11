@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
+    android:background="#88FFFFFF"
+    android:clickable="true"
+    android:focusable="true"
     android:orientation="horizontal"
     android:paddingBottom="20dp"
     android:paddingLeft="10dp"
@@ -13,29 +15,21 @@
         android:id="@+id/item_time"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="2"
-        android:gravity="center_horizontal|center_vertical"
+        android:layout_weight="1"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="start"
         android:text="09:00"
         android:textColor="@color/black"
         android:textSize="25sp" />
 
-    <TextView
-        android:id="@+id/item_memo"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="6"
-        android:gravity="start|center_vertical|center_horizontal"
-        android:paddingLeft="10dp"
-        android:text="학교 갈 때"
-        android:textColor="@color/black"
-        android:textSize="20sp" />
-
     <Switch
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_weight="2"
         android:checked="true"
+        android:clickable="true"
+        android:focusable="true"
         android:paddingRight="20dp" />
 
 </LinearLayout>

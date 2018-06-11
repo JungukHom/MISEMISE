@@ -1,22 +1,26 @@
 package com.skykallove.misemise.Fragment;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
+import com.skykallove.misemise.Activity.MainActivity;
 import com.skykallove.misemise.Data.Url;
 import com.skykallove.misemise.Manager.AirGradeManager;
 import com.skykallove.misemise.Manager.AirGradeWrapper;
 import com.skykallove.misemise.Manager.AnimationManager;
 import com.skykallove.misemise.Manager.AsyncManager;
+import com.skykallove.misemise.Manager.CityLocationManager;
 import com.skykallove.misemise.Manager.JSONManager;
 import com.skykallove.misemise.R;
 import com.skykallove.misemise.Manager.URLParameterManager;
@@ -37,6 +41,8 @@ public class MainFragment extends Fragment {
         return (instance == null ? instance = new MainFragment() : instance);
     }
 
+
+
     List<LinearLayout> backgroundList = new ArrayList<>();
 
     LinearLayout main_whole_background;
@@ -45,11 +51,9 @@ public class MainFragment extends Fragment {
     LinearLayout main_advertisement;
     LinearLayout main_more_detail;
 
-    TextView main_bar_now;
-    TextView main_bar_advertise;
-    TextView main_bar_detail;
-
     // main_title
+    Button main_refresh;
+    Spinner main_location_spinner;
     TextView location;
     TextView time;
     ImageView face;
@@ -93,6 +97,7 @@ public class MainFragment extends Fragment {
     TextView main_so2_quality;
     TextView main_so2_detail;
 
+    // 세부 사항
     TextView main_detail_update_time;
     TextView main_detail_pm10;
     TextView main_detail_pm25;
@@ -107,6 +112,11 @@ public class MainFragment extends Fragment {
 
     TextView main_detail_whole_value;
     TextView main_detail_whole_state;
+
+    // 텍스트뷰(가이드) 색 진하게 칠할 부분
+    TextView currentState;
+    TextView advertisement;
+    TextView detail;
 
     /*
     msrdt 측정일시
@@ -128,6 +138,7 @@ public class MainFragment extends Fragment {
     View view;
 
     private int wholeGrade;
+    private boolean isSpinnerClicked = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -137,8 +148,23 @@ public class MainFragment extends Fragment {
         findUIObjects();
         addBackgroundList();
 
+
+
+        // AdView mAdView = (AdView) view.findViewById(R.id.adView);
+        // AdRequest adRequest = new AdRequest.Builder().build();
+        // mAdView.loadAd(adRequest);
+
+        // data set
+        setData("강남구");
+
+        return view;
+    }
+
+    private  void setData(String gu) {
+
         AsyncManager manager = AsyncManager.getInstance();
-        String a = manager.make(Url.TEST, URLParameterManager.getRequestString("서북권", "서대문구"));
+        String nm = CityLocationManager.getNMbyCityName(gu);
+        String a = manager.make(Url.REAL_TIME_CITY_AIR, URLParameterManager.getRequestString(nm, gu));
 
         Map<String, String> parsedData = JSONManager.parse(a);
 
@@ -146,26 +172,20 @@ public class MainFragment extends Fragment {
         String titleQuality = parsedData.get("IDEX_MVL");
         int titleQualityInt = Integer.parseInt(titleQuality);
         wholeGrade = AirGradeManager.getGradeWithWholeValue(titleQualityInt);
-
-        AdView mAdView = (AdView) view.findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-
-        // data set
         setTitleData(parsedData);
         setDetailData(parsedData);
         setMoreDetailData(parsedData);
         setBackgroundColor(AirGradeManager.getBackgroundColorIdWithGrade(wholeGrade, false));
-
-        return view;
+        setThickBackgroundColor(AirGradeManager.getBackgroundColorIdWithGrade(wholeGrade, true));
     }
 
     private void findUIObjects() {
         findBackgrounds();
+        findThickBackgrounds();
         findTitles();
         findDetails();
         findMoreDetails();
-        findBars();
+        findOthers();
 
         setOnClickListeners();
     }
@@ -184,12 +204,25 @@ public class MainFragment extends Fragment {
         }
     }
 
+    private void setThickBackgroundColor(int colorId) {
+        currentState.setBackgroundColor(colorId);
+        advertisement.setBackgroundColor(colorId);
+        detail.setBackgroundColor(colorId);
+        main_refresh.setBackgroundColor(colorId);
+    }
+
     private void findBackgrounds() {
         main_whole_background = (LinearLayout) view.findViewById(R.id.main_whole_background);
         main_title = (LinearLayout) view.findViewById(R.id.main_title);
         main_detail = (LinearLayout) view.findViewById(R.id.main_detail);
         main_advertisement = (LinearLayout) view.findViewById(R.id.main_advertisement);
         main_more_detail = (LinearLayout) view.findViewById(R.id.main_more_detail_explain);
+    }
+
+    private void findThickBackgrounds() {
+        currentState = (TextView) view.findViewById(R.id.main_bar_currentState);
+        advertisement = (TextView) view.findViewById(R.id.main_bar_advertise);
+        detail = (TextView) view.findViewById(R.id.main_bar_detail);
     }
 
     private void findTitles() {
@@ -255,21 +288,45 @@ public class MainFragment extends Fragment {
         main_detail_whole_state = (TextView) view.findViewById(R.id.main_detail_whole_state);
     }
 
-    private void findBars() {
-        main_bar_now = (TextView) view.findViewById(R.id.main_bar_now);
-        main_bar_advertise = (TextView) view.findViewById(R.id.main_bar_advertise);
-        main_bar_detail = (TextView) view.findViewById(R.id.main_bar_detail);
+    private void findOthers() {
+        main_refresh = (Button) view.findViewById(R.id.main_refresh);
+        main_location_spinner = (Spinner) view.findViewById(R.id.main_location_spinner);
     }
 
     private void setOnClickListeners() {
-        face.setOnClickListener(new View.OnClickListener() {
+        main_refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // // TODO: 2018-06-09 Set title face animation
-                AnimationManager.setAnimation(face, R.anim.shake);
-                Toast.makeText(view.getContext(), "abc", Toast.LENGTH_SHORT).show();
+                setInverseClick();
             }
         });
+
+        main_location_spinner.setSelection(MainActivity.instance.getCityInfo());
+        main_location_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String clicked = parent.getItemAtPosition(position).toString();
+                setData(clicked);
+                setInverseClick();
+                MainActivity.instance.saveCityInfo(position);
+                MainActivity.instance.saveCityInfo(clicked);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                setInverseClick();
+            }
+        });
+    }
+
+    private void setInverseClick() {
+        if (isSpinnerClicked) {
+            main_location_spinner.setVisibility(View.GONE);
+        }
+        else {
+            main_location_spinner.setVisibility(View.VISIBLE);
+        }
+        isSpinnerClicked = !isSpinnerClicked;
     }
 
     private StringBuilder makeMeasureTimeText(Map<String, String> titleData) {

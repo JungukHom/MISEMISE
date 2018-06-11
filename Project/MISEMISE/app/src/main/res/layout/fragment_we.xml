@@ -2,63 +2,56 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#56e3e4"
     tools:context="com.skykallove.misemise.Fragment.WeFragment">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <ScrollView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#56e3e4"
-                android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="35dp"
+                android:layout_marginRight="35dp"
+                android:text="미세미세 8 단계\n"
+                android:textColor="#ffffff"
+                android:textSize="25dp"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="35dp"
-                    android:layout_marginRight="35dp"
-                    android:text="미세미세 8 단계\n"
-                    android:textColor="#ffffff"
-                    android:textSize="25dp"
-                    android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:gravity="center"
+                android:text="@string/we_explain_01"
+                android:textColor="#ffffff"
+                android:textSize="17dp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginRight="25dp"
-                    android:gravity="center"
-                    android:text="@string/we_explain_01"
-                    android:textColor="#ffffff"
-                    android:textSize="17dp" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="150dp"
+                android:src="@drawable/step" />
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="180dp"
-                    android:src="@drawable/step" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:gravity="center"
+                android:text="@string/we_explain_02"
+                android:textColor="#ffffff"
+                android:textSize="17dp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginRight="25dp"
-                    android:gravity="center"
-                    android:text="@string/we_explain_02"
-                    android:textColor="#ffffff"
-                    android:textSize="17dp" />
-
-            </LinearLayout>
-        </ScrollView>
-
-    </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
 
 </FrameLayout>

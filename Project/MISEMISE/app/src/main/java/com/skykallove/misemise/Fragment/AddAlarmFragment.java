@@ -8,12 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TimePicker;
 
 import com.skykallove.misemise.Activity.MainActivity;
-import com.skykallove.misemise.Data.AlarmListViewAdapter;
 import com.skykallove.misemise.R;
 
 public class AddAlarmFragment extends Fragment {
@@ -30,10 +27,8 @@ public class AddAlarmFragment extends Fragment {
 
     View view;
 
-
-
     TimePicker timePicker;
-    EditText memo;
+
     Button cancel;
     Button save;
 
@@ -63,7 +58,6 @@ public class AddAlarmFragment extends Fragment {
     }
 
     private void findOthers() {
-        memo = (EditText) view.findViewById(R.id.add_alarm_memo);
         timePicker = (TimePicker) view.findViewById(R.id.add_alarm_time_picker);
     }
 
@@ -85,13 +79,12 @@ public class AddAlarmFragment extends Fragment {
     }
 
     private void goBackToAlarmFragment() {
-        mainActivity.replaceFragment(mainActivity.currentFragment, mainActivity.currentFragmentID);
+        mainActivity.replaceFragment(AlarmFragment.getInstance(), R.layout.fragment_alarm);
     }
 
     private void saveAlarmInfo() {
         int hour = timePicker.getHour();
         int minute = timePicker.getMinute();
-        String memo = this.memo.getText().toString();
 
         // TODO: 2018-06-09 save this infos into db
         // TODO: 2018-06-09 save this infos into list
@@ -108,6 +101,6 @@ public class AddAlarmFragment extends Fragment {
             _minute = "0" + _minute;
         }
 
-        AlarmFragment.getInstance().AddListViewItem(_hour, _minute, memo);
+        AlarmFragment.getInstance().addListViewItem(_hour, _minute);
     }
 }

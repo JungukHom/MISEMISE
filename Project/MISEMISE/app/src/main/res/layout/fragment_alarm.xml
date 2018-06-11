@@ -1,15 +1,19 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/test"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#56e3e4"
     tools:context="com.skykallove.misemise.Fragment.AlarmFragment">
 
     <ListView
         android:id="@+id/alarm_alarm_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="298dp"
+        android:layout_height="495dp"
+        android:clickable="true"
+        android:focusable="true"
+        tools:layout_editor_absoluteY="8dp"
+        tools:layout_editor_absoluteX="8dp">
 
     </ListView>
 
@@ -20,7 +24,7 @@
         android:layout_marginBottom="30dp"
         android:layout_marginEnd="30dp"
         android:layout_marginRight="30dp"
-        android:src="@android:drawable/ic_dialog_alert"
+        android:src="@android:drawable/ic_menu_add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 

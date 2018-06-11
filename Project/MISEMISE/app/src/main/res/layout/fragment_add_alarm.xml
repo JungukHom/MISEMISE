@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#56e3e4"
     android:orientation="vertical"
     tools:context="com.skykallove.misemise.Fragment.AddAlarmFragment">
 
@@ -12,15 +13,6 @@
         android:timePickerMode="spinner">
 
     </TimePicker>
-
-    <EditText
-        android:id="@+id/add_alarm_memo"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:gravity="left|top"
-        android:hint="@string/write_memo"
-        android:textColor="@color/black"
-        android:textSize="12sp" />
 
     <!-- 저장, 취소버튼 -->
     <LinearLayout
