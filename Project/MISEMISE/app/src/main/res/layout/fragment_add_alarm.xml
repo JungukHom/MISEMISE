@@ -14,10 +14,89 @@
 
     </TimePicker>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:gravity="center_horizontal">
+
+        <ToggleButton
+            android:id="@+id/list_item_monday"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@color/noColor"
+            android:textColor="@color/black"
+            android:textOff="@string/monday"
+            android:textOn="@string/monday"
+            android:textSize="17sp" />
+
+        <ToggleButton
+            android:id="@+id/list_item_tuesday"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@color/noColor"
+            android:textColor="@color/black"
+            android:textOff="@string/tuesday"
+            android:textOn="@string/tuesday"
+            android:textSize="17sp" />
+
+        <ToggleButton
+            android:id="@+id/list_item_wednesday"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@color/noColor"
+            android:textColor="@color/black"
+            android:textOff="@string/wednesday"
+            android:textOn="@string/wednesday"
+            android:textSize="17sp" />
+
+        <ToggleButton
+            android:id="@+id/list_item_thursday"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@color/noColor"
+            android:textColor="@color/black"
+            android:textOff="@string/thursday"
+            android:textOn="@string/thursday"
+            android:textSize="17sp" />
+
+        <ToggleButton
+            android:id="@+id/list_item_friday"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@color/noColor"
+            android:textColor="@color/black"
+            android:textOff="@string/friday"
+            android:textOn="@string/friday"
+            android:textSize="17sp" />
+
+        <ToggleButton
+            android:id="@+id/list_item_saturday"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@color/noColor"
+            android:textColor="@color/black"
+            android:textOff="@string/saturday"
+            android:textOn="@string/saturday"
+            android:textSize="17sp" />
+
+        <ToggleButton
+            android:id="@+id/list_item_sunday"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@color/noColor"
+            android:textColor="@color/black"
+            android:textOff="@string/sunday"
+            android:textOn="@string/sunday"
+            android:textSize="17sp" />
+
+    </LinearLayout>
+
     <!-- 저장, 취소버튼 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:orientation="horizontal">
 
         <Button

@@ -1,6 +1,5 @@
 package com.skykallove.misemise.Fragment;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -13,13 +12,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
 import com.skykallove.misemise.Activity.MainActivity;
 import com.skykallove.misemise.Data.Url;
 import com.skykallove.misemise.Manager.AirGradeManager;
 import com.skykallove.misemise.Manager.AirGradeWrapper;
-import com.skykallove.misemise.Manager.AnimationManager;
 import com.skykallove.misemise.Manager.AsyncManager;
 import com.skykallove.misemise.Manager.CityLocationManager;
 import com.skykallove.misemise.Manager.JSONManager;
@@ -133,6 +132,7 @@ public class MainFragment extends Fragment {
     idex_mvl 통합대기환경지수
     arplt_main 지수결정물질
     */
+    Toolbar toolbar;
 
     View view;
 
@@ -147,19 +147,20 @@ public class MainFragment extends Fragment {
         findUIObjects();
         addBackgroundList();
 
-
+        main_location_spinner.setVisibility(View.GONE);
 
         // AdView mAdView = (AdView) view.findViewById(R.id.adView);
         // AdRequest adRequest = new AdRequest.Builder().build();
         // mAdView.loadAd(adRequest);
 
         // data set
-        setData("강남구");
+        setData(MainActivity.instance.getCityInfoString());
 
         return view;
     }
 
-    private  void setData(String gu) {
+    private void setData(String gu) {
+        Log.i("test", "setData");
 
         AsyncManager manager = AsyncManager.getInstance();
         String nm = CityLocationManager.getNMbyCityName(gu);
@@ -201,6 +202,7 @@ public class MainFragment extends Fragment {
         for (int i = 0; i < backgroundList.size(); i++) {
             backgroundList.get(i).setBackgroundResource(colorId);
         }
+        toolbar.setBackgroundColor(getResources().getColor(colorId));
     }
 
     private void setThickBackgroundColor(int colorId) {
@@ -290,7 +292,10 @@ public class MainFragment extends Fragment {
     private void findOthers() {
         main_refresh = (Button) view.findViewById(R.id.main_refresh);
         main_location_spinner = (Spinner) view.findViewById(R.id.main_location_spinner);
+        toolbar = (Toolbar) MainActivity.instance.findViewById(R.id.toolbar);
     }
+
+    boolean isPassed = false;
 
     private void setOnClickListeners() {
         main_refresh.setOnClickListener(new View.OnClickListener() {
@@ -300,20 +305,23 @@ public class MainFragment extends Fragment {
             }
         });
 
-        // main_location_spinner.setSelection(MainActivity.instance.getCityInfo());
+        main_location_spinner.setSelection(MainActivity.instance.getCityInfo());
         main_location_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String clicked = parent.getItemAtPosition(position).toString();
-                setData(clicked);
-                setInverseClick();
-                MainActivity.instance.saveCityInfo(position);
-                MainActivity.instance.saveCityInfo(clicked);
+                if (isPassed) {
+                    String clicked = parent.getItemAtPosition(position).toString();
+                    setData(clicked);
+                    setInverseClick();
+                    MainActivity.instance.saveCityInfo(position);
+                    MainActivity.instance.saveCityInfo(clicked);
+                }
+                isPassed = true;
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                // setInverseClick();
+                // do nothing
             }
         });
     }
@@ -321,8 +329,7 @@ public class MainFragment extends Fragment {
     private void setInverseClick() {
         if (isSpinnerClicked) {
             main_location_spinner.setVisibility(View.GONE);
-        }
-        else {
+        } else {
             main_location_spinner.setVisibility(View.VISIBLE);
         }
         isSpinnerClicked = !isSpinnerClicked;
@@ -353,12 +360,13 @@ public class MainFragment extends Fragment {
     private void setTitleData(Map<String, String> titleData) {
         String date = makeMeasureTimeText(titleData).toString();
         String _qualityMessage = AirGradeManager.getGradeMessageWithGrade(wholeGrade);
+        String shortMessage = AirGradeManager.getGradeShortMessageWithGrade(wholeGrade);
         int faceId = AirGradeManager.getGradeImageIdWithGrade(wholeGrade);
 
         location.setText(titleData.get("MSRRGN_NM") + " " + titleData.get("MSRSTE_NM"));
         time.setText("측정일시 : " + date);
         face.setImageResource(faceId);
-        quality.setText(titleData.get("IDEX_NM"));
+        quality.setText(shortMessage);
         qualityMessage.setText(_qualityMessage);
 
         // titleData.get("MSRDT")

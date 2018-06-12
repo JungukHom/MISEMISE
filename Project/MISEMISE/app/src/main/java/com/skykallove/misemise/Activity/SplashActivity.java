@@ -21,6 +21,9 @@ public class SplashActivity extends AppCompatActivity {
 
         ShowLoadingImageTask task = new ShowLoadingImageTask();
         task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+
+        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.color.black));
+        setTitle("");
     }
 
     private class ShowLoadingImageTask extends AsyncTask<String, String, String> {

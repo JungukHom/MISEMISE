@@ -1,8 +1,6 @@
 package com.skykallove.misemise.Fragment;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -20,7 +18,7 @@ public class ContactFragment extends Fragment {
 
     private static ContactFragment instance = null;
 
-    public static  ContactFragment getInstance() {
+    public static ContactFragment getInstance() {
         return (instance == null ? instance = new ContactFragment() : instance);
     }
 
@@ -48,8 +46,8 @@ public class ContactFragment extends Fragment {
         email.setType("plain/text");
         String[] address = {"developer0223@gmail.com"};
         email.putExtra(Intent.EXTRA_EMAIL, address);
-        email.putExtra(Intent.EXTRA_SUBJECT,"MISEMISE 문의");
-        email.putExtra(Intent.EXTRA_TEXT,"여기에 입력해 주세요.\n");
+        email.putExtra(Intent.EXTRA_SUBJECT, "MISEMISE 문의");
+        email.putExtra(Intent.EXTRA_TEXT, "여기에 입력해 주세요.\n");
         startActivity(email);
     }
 }

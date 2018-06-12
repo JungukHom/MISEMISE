@@ -11,7 +11,6 @@
         android:layout_height="match_parent"
         android:scrollbars="none">
 
-
         <!-- 전체 layout -->
         <LinearLayout
             android:id="@+id/main_whole_background"
@@ -42,16 +41,16 @@
                 <Spinner
                     android:id="@+id/main_location_spinner"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp"
+                    android:layout_height="30dp"
                     android:entries="@array/city"
-                    android:visibility="gone" />
+                    android:spinnerMode="dropdown"
+                    android:textAlignment="center" />
 
                 <TextView
                     android:id="@+id/main_location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
                     android:textAlignment="center"
                     android:textColor="@color/main_text"
                     android:textSize="25sp" />

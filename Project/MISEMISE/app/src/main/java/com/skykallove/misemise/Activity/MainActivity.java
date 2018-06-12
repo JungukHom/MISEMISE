@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity
 
         SharedPreferences.Editor editor = pref.edit();
         editor.putStringSet("alarm", values);
-        editor.commit();
+        editor.apply();
     }
 
     public int getCityInfo() {
@@ -95,13 +95,19 @@ public class MainActivity extends AppCompatActivity
         SharedPreferences prefs = getSharedPreferences(ALARM_CITY_NAME, MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putInt(ALARM_CITY_NAME, cityIndex);
+        editor.apply();
     }
 
     public void saveCityInfo(String cityInfo) {
         SharedPreferences prefs = getSharedPreferences(ALARM_CITY_NAME_STRING, MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(ALARM_CITY_NAME_STRING, cityInfo);
-        editor.commit();
+        editor.apply();
+    }
+
+    public String getCityInfoString() {
+        SharedPreferences prefs = getSharedPreferences(ALARM_CITY_NAME_STRING, MODE_PRIVATE);
+        return prefs.getString(ALARM_CITY_NAME_STRING, "강남구");
     }
 
     @Override
@@ -175,9 +181,9 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
 
         return super.onOptionsItemSelected(item);
     }

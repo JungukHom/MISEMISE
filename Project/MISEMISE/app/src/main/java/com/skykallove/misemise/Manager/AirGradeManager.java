@@ -23,6 +23,16 @@ public class AirGradeManager {
     public static final String GRADE_07 = "미세먼지 폭탄이에요!";
     public static final String GRADE_08 = "최악!! 집 밖은 위험해요!";
 
+    public static final String GRADE_01_SHORT = "최고";
+    public static final String GRADE_02_SHORT = "좋음";
+    public static final String GRADE_03_SHORT = "양호";
+    public static final String GRADE_04_SHORT = "보통";
+
+    public static final String GRADE_05_SHORT = "나쁨";
+    public static final String GRADE_06_SHORT = "상당히 나쁨";
+    public static final String GRADE_07_SHORT = "매우 나쁨";
+    public static final String GRADE_08_SHORT = "최악";
+
     public static AirGradeWrapper get(String type, String data) {
         AirGradeWrapper result;
         switch (type) {
@@ -186,6 +196,48 @@ public class AirGradeManager {
 
             case 8:
                 result = GRADE_08;
+                break;
+
+            default:
+                result = "미세먼지 정보를 불러오는 중 오류가 발생하였습니다.";
+        }
+
+        return result;
+    }
+
+    public static String getGradeShortMessageWithGrade(int grade) {
+        String result;
+        switch (grade) {
+            case 1:
+                result = GRADE_01_SHORT;
+                break;
+
+            case 2:
+                result = GRADE_02_SHORT;
+                break;
+
+            case 3:
+                result = GRADE_03_SHORT;
+                break;
+
+            case 4:
+                result = GRADE_04_SHORT;
+                break;
+
+            case 5:
+                result = GRADE_05_SHORT;
+                break;
+
+            case 6:
+                result = GRADE_06_SHORT;
+                break;
+
+            case 7:
+                result = GRADE_07_SHORT;
+                break;
+
+            case 8:
+                result = GRADE_08_SHORT;
                 break;
 
             default:

@@ -8,10 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.TimePicker;
+import android.widget.ToggleButton;
 
 import com.skykallove.misemise.Activity.MainActivity;
 import com.skykallove.misemise.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AddAlarmFragment extends Fragment {
 
@@ -21,13 +26,22 @@ public class AddAlarmFragment extends Fragment {
 
     private static AddAlarmFragment instance = null;
 
-    public static  AddAlarmFragment getInstance() {
+    public static AddAlarmFragment getInstance() {
         return (instance == null ? instance = new AddAlarmFragment() : instance);
     }
 
     View view;
 
     TimePicker timePicker;
+
+    List<ToggleButton> toggleButtonList = new ArrayList<>();
+    ToggleButton monday;
+    ToggleButton tuesday;
+    ToggleButton wednesday;
+    ToggleButton thursday;
+    ToggleButton friday;
+    ToggleButton saturday;
+    ToggleButton sunday;
 
     Button cancel;
     Button save;
@@ -39,10 +53,10 @@ public class AddAlarmFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_add_alarm, container, false);
 
-
-
         findUIObjects();
         setOnClickListeners();
+        addToggleButtonsToList();
+        setToggleButtonListeners();
 
         return view;
     }
@@ -59,6 +73,39 @@ public class AddAlarmFragment extends Fragment {
 
     private void findOthers() {
         timePicker = (TimePicker) view.findViewById(R.id.add_alarm_time_picker);
+
+        monday = (ToggleButton) view.findViewById(R.id.list_item_monday);
+        tuesday = (ToggleButton) view.findViewById(R.id.list_item_tuesday);
+        wednesday = (ToggleButton) view.findViewById(R.id.list_item_wednesday);
+        thursday = (ToggleButton) view.findViewById(R.id.list_item_thursday);
+        friday = (ToggleButton) view.findViewById(R.id.list_item_friday);
+        saturday = (ToggleButton) view.findViewById(R.id.list_item_saturday);
+        sunday = (ToggleButton) view.findViewById(R.id.list_item_sunday);
+    }
+
+    private void addToggleButtonsToList() {
+        toggleButtonList.add(monday);
+        toggleButtonList.add(tuesday);
+        toggleButtonList.add(wednesday);
+        toggleButtonList.add(thursday);
+        toggleButtonList.add(friday);
+        toggleButtonList.add(saturday);
+        toggleButtonList.add(sunday);
+    }
+
+    private void setToggleButtonListeners() {
+        for (int i = 0; i < toggleButtonList.size(); i++) {
+            toggleButtonList.get(i).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked) {
+                        buttonView.setBackgroundColor(getResources().getColor(R.color.gray));
+                    } else {
+                        buttonView.setBackgroundColor(getResources().getColor(R.color.noColor));
+                    }
+                }
+            });
+        }
     }
 
     private void setOnClickListeners() {
