@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#56e3e4"
+    android:background="@color/layout_background"
     tools:context="com.skykallove.misemise.Fragment.WHOFragment">
 
     <ScrollView
@@ -20,7 +20,7 @@
                 android:layout_marginLeft="35dp"
                 android:layout_marginRight="35dp"
                 android:gravity="center"
-                android:text="미세미세는 WHO 기준을 사용합니다. 왜?\n"
+                android:text="@string/who_explain_00"
                 android:textColor="#ffffff"
                 android:textSize="25dp"
                 android:textStyle="bold" />
@@ -31,7 +31,7 @@
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
                 android:gravity="center"
-                android:text="@string/who_explain"
+                android:text="@string/who_explain_01"
                 android:textColor="#ffffff"
                 android:textSize="17dp" />
 
@@ -52,7 +52,7 @@
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
                 android:gravity="center"
-                android:text="\n현재 WHO기준은 8단계 모드에서만 적용됩니다. 한국환경공단 기준을 이용하시고 싶으신 분들은 설정에서 4단계 모드로 바꿔주세요."
+                android:text="@string/who_explain_02"
                 android:textColor="#ffffff"
                 android:textSize="17dp" />
 

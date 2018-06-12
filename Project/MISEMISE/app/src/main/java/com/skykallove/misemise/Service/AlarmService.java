@@ -2,7 +2,9 @@ package com.skykallove.misemise.Service;
 
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
+import android.app.TaskStackBuilder;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -10,6 +12,7 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.skykallove.misemise.Activity.MainActivity;
 import com.skykallove.misemise.Data.Url;
 import com.skykallove.misemise.Manager.AirGradeManager;
 import com.skykallove.misemise.Manager.AsyncManager;
@@ -155,18 +158,30 @@ public class AlarmService extends Service {
     }
 
     private void showNotificationBar() {
+//        Intent notiIconClickIntent = new Intent(getApplicationContext(), MainActivity.class);
+//        notiIconClickIntent .putExtra("particularFragment", "notiIntent");
+//
+//        notiIconClickIntent .setAction(Intent.ACTION_MAIN);
+//        notiIconClickIntent .addCategory(Intent.CATEGORY_LAUNCHER);
+//        TaskStackBuilder stackBuilder = TaskStackBuilder.create(getApplicationContext());
+//        stackBuilder.addParentStack(MainActivity.class);
+//
+//        stackBuilder.addNextIntent(notiIconClickIntent);
+//        PendingIntent pendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+
         NotificationManager notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
         Notification notification;
 
         String city = getCityInfo();
         Map<String, String> parsedData = getParsedData(city);
-        String titleQualityString = parsedData.get("IDEX_NM");
         String _titleQualityInt = parsedData.get("IDEX_MVL");
         int titleQualityInt = Integer.parseInt(_titleQualityInt);
+        String titleQualityString = AirGradeManager.getGradeShortMessageWithGrade(AirGradeManager.getGradeWithWholeValue(titleQualityInt));
         notification = new Notification.Builder(getApplicationContext())
                 .setSmallIcon(R.drawable.misemise_logo)
                 .setContentTitle(city + "의 기상 상황은 " + titleQualityString + "입니다.")
                 .setContentText(AirGradeManager.getGradeMessageWithGrade(AirGradeManager.getGradeWithWholeValue(titleQualityInt)))
+                // .setContentIntent(pendingIntent)
                 .build();
 
         notificationManager.notify(0, notification);

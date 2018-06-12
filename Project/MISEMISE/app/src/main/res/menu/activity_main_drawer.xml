@@ -4,29 +4,29 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_main"
-            android:icon="@drawable/face_01"
+            android:icon="@drawable/misemise_logo"
             android:title="@string/nav_main" />
         <item
             android:id="@+id/nav_who"
-            android:icon="@drawable/face_02"
+            android:icon="@drawable/nav_who"
             android:title="@string/nav_who" />
         <item
             android:id="@+id/nav_we"
-            android:icon="@drawable/face_03"
+            android:icon="@drawable/nav_who"
             android:title="@string/nav_we" />
         <item
             android:id="@+id/nav_alarm"
-            android:icon="@drawable/face_04"
+            android:icon="@drawable/alarm"
             android:title="@string/nav_alarm" />
 
         <item
             android:id="@+id/nav_share"
-            android:icon="@drawable/face_05"
+            android:icon="@drawable/share"
             android:title="@string/nav_share" />
 
         <item
             android:id="@+id/nav_contact"
-            android:icon="@drawable/face_06"
+            android:icon="@drawable/contact"
             android:title="@string/nav_contact" />
     </group>
 

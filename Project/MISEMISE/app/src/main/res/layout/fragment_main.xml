@@ -42,6 +42,7 @@
                     android:id="@+id/main_location_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
+                    android:dropDownWidth="100dp"
                     android:entries="@array/city"
                     android:spinnerMode="dropdown"
                     android:textAlignment="center" />

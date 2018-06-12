@@ -1,8 +1,10 @@
 package com.skykallove.misemise.Activity;
 
+import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 
 import com.skykallove.misemise.Manager.IntentManager;
@@ -12,7 +14,7 @@ import com.skykallove.misemise.R;
  * Created by sky on 2018-06-12.
  */
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends Activity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -22,7 +24,9 @@ public class SplashActivity extends AppCompatActivity {
         ShowLoadingImageTask task = new ShowLoadingImageTask();
         task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
-        getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.color.black));
+        // ActionBar actionBar = getSupportActionBar();
+        // actionBar.setBackgroundDrawable(getResources().getDrawable(R.color.layout_background));
+
         setTitle("");
     }
 

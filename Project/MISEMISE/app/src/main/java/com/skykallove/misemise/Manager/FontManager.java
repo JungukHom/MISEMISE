@@ -10,7 +10,7 @@ import com.tsengvn.typekit.Typekit;
 
 public class FontManager extends Application {
 
-    private String nanumPen = "NanumBarunGothic.ttf";
+    private final String nanumPen = "NanumBarunGothic.ttf";
 
     @Override
     public void onCreate() {
