@@ -36,12 +36,12 @@
                 android:textSize="17dp" />
 
             <ImageView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:src="@drawable/who" />
 
             <ImageView
-                android:layout_width="390dp"
+                android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:src="@drawable/who1" />
 

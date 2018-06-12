@@ -178,7 +178,7 @@ public class AlarmService extends Service {
         int titleQualityInt = Integer.parseInt(_titleQualityInt);
         String titleQualityString = AirGradeManager.getGradeShortMessageWithGrade(AirGradeManager.getGradeWithWholeValue(titleQualityInt));
         notification = new Notification.Builder(getApplicationContext())
-                .setSmallIcon(R.drawable.misemise_logo)
+                .setSmallIcon(R.drawable.cloud_icon)
                 .setContentTitle(city + "의 기상 상황은 " + titleQualityString + "입니다.")
                 .setContentText(AirGradeManager.getGradeMessageWithGrade(AirGradeManager.getGradeWithWholeValue(titleQualityInt)))
                 // .setContentIntent(pendingIntent)
