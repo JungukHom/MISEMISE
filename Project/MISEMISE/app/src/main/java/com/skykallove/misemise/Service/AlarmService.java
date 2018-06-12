@@ -10,7 +10,6 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import com.skykallove.misemise.Activity.MainActivity;
 import com.skykallove.misemise.Data.Url;
 import com.skykallove.misemise.Manager.AirGradeManager;
 import com.skykallove.misemise.Manager.AsyncManager;
@@ -35,7 +34,7 @@ public class AlarmService extends Service {
 
     private static final String ALARM_PREF_NAME = "alarmPrefName";
     private static final String ALARM_CITY_NAME = "alarmCityName";
-
+    private static final String  ALARM_CITY_NAME_STRING = "alarmCityNameString";
 
     public static List<String> alarmTime = new ArrayList<>();
 
@@ -49,8 +48,8 @@ public class AlarmService extends Service {
     }
 
     public String getCityInfo() {
-        SharedPreferences prefs = getSharedPreferences(ALARM_CITY_NAME, MODE_PRIVATE);
-        return prefs.getString("defaultCityName", "강남구");
+        SharedPreferences prefs = getSharedPreferences(ALARM_CITY_NAME_STRING, MODE_PRIVATE);
+        return prefs.getString(ALARM_CITY_NAME_STRING, "강남구");
     }
 
     public void saveMyAlarmTime(List<String> info) {
@@ -160,10 +159,14 @@ public class AlarmService extends Service {
         Notification notification;
 
         String city = getCityInfo();
+        Map<String, String> parsedData = getParsedData(city);
+        String titleQualityString = parsedData.get("IDEX_NM");
+        String _titleQualityInt = parsedData.get("IDEX_MVL");
+        int titleQualityInt = Integer.parseInt(_titleQualityInt);
         notification = new Notification.Builder(getApplicationContext())
-                .setSmallIcon(R.drawable.common_google_signin_btn_icon_dark)
-                .setContentTitle("미세미세")
-                .setContentText(city + "의 기상 상황은 " +  getGrade(city) + "입니다.")
+                .setSmallIcon(R.drawable.misemise_logo)
+                .setContentTitle(city + "의 기상 상황은 " + titleQualityString + "입니다.")
+                .setContentText(AirGradeManager.getGradeMessageWithGrade(AirGradeManager.getGradeWithWholeValue(titleQualityInt)))
                 .build();
 
         notificationManager.notify(0, notification);
@@ -178,7 +181,7 @@ public class AlarmService extends Service {
         }
     }
 
-    private String getGrade(String gu) {
+    private Map<String, String> getParsedData(String gu) {
 
         AsyncManager manager = AsyncManager.getInstance();
         String nm = CityLocationManager.getNMbyCityName(gu);
@@ -186,10 +189,6 @@ public class AlarmService extends Service {
 
         Map<String, String> parsedData = JSONManager.parse(a);
 
-        // 통합대기환경등급을 비교해 background color change
-        String titleQuality = parsedData.get("IDEX_MVL");
-
-
-        return titleQuality;
+        return parsedData;
     }
 }

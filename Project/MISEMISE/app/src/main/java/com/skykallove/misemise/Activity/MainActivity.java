@@ -32,6 +32,7 @@ import com.skykallove.misemise.Fragment.MainFragment;
 import com.skykallove.misemise.Fragment.ShareFragment;
 import com.skykallove.misemise.Fragment.WHOFragment;
 import com.skykallove.misemise.Fragment.WeFragment;
+import com.skykallove.misemise.Manager.IntentManager;
 import com.skykallove.misemise.R;
 import com.skykallove.misemise.Service.AlarmService;
 import com.skykallove.misemise.Service.RestartService;
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity
 
     private static final String ALARM_PREF_NAME = "alarmPrefName";
     private static final String ALARM_CITY_NAME = "alarmCityName";
+    private static final String ALARM_CITY_NAME_STRING = "alarmCityNameString";
 
     public int currentFragmentID = R.id.nav_main;
     public Fragment currentFragment = null;
@@ -86,19 +88,20 @@ public class MainActivity extends AppCompatActivity
 
     public int getCityInfo() {
         SharedPreferences prefs = getSharedPreferences(ALARM_CITY_NAME, MODE_PRIVATE);
-        return prefs.getInt("defaultCity", 0);
+        return prefs.getInt(ALARM_CITY_NAME, 0);
     }
 
     public void saveCityInfo(int cityIndex) {
         SharedPreferences prefs = getSharedPreferences(ALARM_CITY_NAME, MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putInt("defaultCity", cityIndex);
+        editor.putInt(ALARM_CITY_NAME, cityIndex);
     }
 
     public void saveCityInfo(String cityInfo) {
-        SharedPreferences prefs = getSharedPreferences(ALARM_CITY_NAME, MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences(ALARM_CITY_NAME_STRING, MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putString("defaultCityName", cityInfo);
+        editor.putString(ALARM_CITY_NAME_STRING, cityInfo);
+        editor.commit();
     }
 
     @Override
@@ -133,7 +136,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         // basic codes
 
-        startService(new Intent(this, AlarmService.class));
+        IntentManager.startService(getApplicationContext(), AlarmService.class);
     }
 
     private void setActionBarColor() {

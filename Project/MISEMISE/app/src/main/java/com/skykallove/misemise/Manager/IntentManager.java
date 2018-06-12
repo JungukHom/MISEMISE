@@ -12,4 +12,8 @@ public class IntentManager {
     public static void startActivity(Context context, Class forwardClass) {
         context.startActivity(new Intent(context, forwardClass));
     }
+
+    public static void startService(Context context, Class service) {
+        context.startService(new Intent(context, service));
+    }
 }

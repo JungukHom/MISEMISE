@@ -3,6 +3,7 @@ package com.skykallove.misemise.Fragment;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,8 +41,6 @@ public class MainFragment extends Fragment {
     public static MainFragment getInstance() {
         return (instance == null ? instance = new MainFragment() : instance);
     }
-
-
 
     List<LinearLayout> backgroundList = new ArrayList<>();
 
@@ -301,7 +300,7 @@ public class MainFragment extends Fragment {
             }
         });
 
-        main_location_spinner.setSelection(MainActivity.instance.getCityInfo());
+        // main_location_spinner.setSelection(MainActivity.instance.getCityInfo());
         main_location_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -314,7 +313,7 @@ public class MainFragment extends Fragment {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                setInverseClick();
+                // setInverseClick();
             }
         });
     }
