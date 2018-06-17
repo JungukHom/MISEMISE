@@ -63,19 +63,19 @@ public class AirGradeManager {
 
     public static int getGradeWithWholeValue(int value) {
         int result;
-        if (value > 00 && value <= 10) {
+        if (value > 00 && value <= 30) {
             result = 1;
-        } else if (value > 10 && value <= 20) {
+        } else if (value > 30 && value <= 60) {
             result = 2;
-        } else if (value > 20 && value <= 30) {
+        } else if (value > 60 && value <= 90) {
             result = 3;
-        } else if (value > 30 && value <= 40) {
+        } else if (value > 90 && value <= 110) {
             result = 4;
-        } else if (value > 40 && value <= 50) {
+        } else if (value > 110 && value <= 130) {
             result = 5;
-        } else if (value > 50 && value <= 60) {
+        } else if (value > 130 && value <= 150) {
             result = 6;
-        } else if (value > 60 && value <= 70) {
+        } else if (value > 150 && value <= 170) {
             result = 7;
         } else {
             result = 8;

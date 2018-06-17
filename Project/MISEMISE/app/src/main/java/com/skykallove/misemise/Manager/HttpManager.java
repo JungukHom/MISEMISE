@@ -25,8 +25,8 @@ public class HttpManager {
     }
 
     public String request(String _url) {
+        HttpURLConnection connection = null;
         try {
-            HttpURLConnection connection = null;
             URL url = new URL(_url);
 
             connection = (HttpURLConnection) url.openConnection();
@@ -47,9 +47,12 @@ public class HttpManager {
                 page += line;
             }
             return page;
-        }
-        catch (Exception e) {
-
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                connection.disconnect();
+            }
         }
 
 
@@ -63,8 +66,7 @@ public class HttpManager {
 
         if (params == null) {
             sbParams.append("");
-        }
-        else {
+        } else {
             boolean isAnd = false;
 
             _url += params.get("msrrgn") + "/" + params.get("msrste");
