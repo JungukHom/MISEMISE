@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.util.Log;
 
 /**
- * Created by sky on 2018-06-05.
+ * Created by developer0223 on 2019-04-11.
  */
 
 public class RestartService extends BroadcastReceiver {
