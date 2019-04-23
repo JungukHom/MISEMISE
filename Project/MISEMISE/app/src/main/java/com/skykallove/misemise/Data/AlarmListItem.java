@@ -5,9 +5,7 @@ package com.skykallove.misemise.Data;
  */
 
 public class AlarmListItem {
-
     private String time;
-
 
     public String getTime() {
         return time;

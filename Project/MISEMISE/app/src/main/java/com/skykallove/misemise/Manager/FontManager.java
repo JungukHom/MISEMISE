@@ -17,5 +17,4 @@ public class FontManager extends Application {
         super.onCreate();
         Typekit.getInstance().addNormal(Typekit.createFromAsset(this, "fonts/" + nanumPen));
     }
-
 }

@@ -37,5 +37,4 @@ public class AsyncManager {
             return result;
         }
     }
-
 }

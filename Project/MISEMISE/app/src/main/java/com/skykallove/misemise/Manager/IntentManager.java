@@ -8,7 +8,6 @@ import android.content.Intent;
  */
 
 public class IntentManager {
-
     public static void startActivity(Context context, Class forwardClass) {
         context.startActivity(new Intent(context, forwardClass));
     }

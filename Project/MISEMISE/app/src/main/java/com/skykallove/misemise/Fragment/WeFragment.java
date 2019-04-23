@@ -22,7 +22,6 @@ public class WeFragment extends Fragment {
         return (instance == null ? instance = new WeFragment() : instance);
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

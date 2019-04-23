@@ -169,35 +169,27 @@ public class AlarmService extends Service {
 //        stackBuilder.addNextIntent(notiIconClickIntent);
 //        PendingIntent pendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        NotificationManager notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
-        Notification notification;
-
         String city = getCityInfo();
         Map<String, String> parsedData = getParsedData(city);
         String _titleQualityInt = parsedData.get("IDEX_MVL");
         int titleQualityInt = Integer.parseInt(_titleQualityInt);
         String titleQualityString = AirGradeManager.getGradeShortMessageWithGrade(AirGradeManager.getGradeWithWholeValue(titleQualityInt));
-        notification = new Notification.Builder(getApplicationContext())
+        Notification notification = new Notification.Builder(getApplicationContext())
                 .setSmallIcon(R.drawable.cloud_icon)
                 .setContentTitle(city + "의 기상 상황은 " + titleQualityString + "입니다.")
                 .setContentText(AirGradeManager.getGradeMessageWithGrade(AirGradeManager.getGradeWithWholeValue(titleQualityInt)))
                 // .setContentIntent(pendingIntent)
                 .build();
 
+        NotificationManager notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
         notificationManager.notify(0, notification);
     }
 
     private void sleep(int timeMilliseconds) throws InterruptedException {
-        try {
-            Thread.sleep(timeMilliseconds);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        Thread.sleep(timeMilliseconds);
     }
 
     private Map<String, String> getParsedData(String gu) {
-
         AsyncManager manager = AsyncManager.getInstance();
         String nm = CityLocationManager.getNMbyCityName(gu);
         String a = manager.make(Url.REAL_TIME_CITY_AIR, URLParameterManager.getRequestString(nm, gu));
